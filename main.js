@@ -15,6 +15,15 @@ var connection = false;
 
 class Videomatrix extends utils.Adapter {
 
+	function initMatrix(){
+		this.log.info('initialized Matrix');
+		connect();
+	}
+
+	function connect(cb){
+		this.log.info('connected to Matrix');
+	}
+
 	/**
 	 * @param {Partial<ioBroker.AdapterOptions>} [options={}]
 	 */
@@ -92,14 +101,7 @@ class Videomatrix extends utils.Adapter {
 
 	}
 
-	function initMatrix(){
-		this.log.info('initialized Matrix');
-		connect();
-	}
-
-	function connect(cb){
-		this.log.info('connected to Matrix');
-	}
+	
 
 	/**
 	 * Is called when adapter shuts down - callback has to be called under any circumstances!
