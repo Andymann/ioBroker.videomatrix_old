@@ -73,7 +73,7 @@
 	},
 	"native": {
 		"host": "192.168.1.223",
-        	"port": 1024
+        	"port": "1024"
 	},
 	"objects": [],
 	"instanceObjects": [
