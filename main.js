@@ -11,7 +11,7 @@ const utils = require('@iobroker/adapter-core');
 // Load your modules here, e.g.:
 // const fs = require("fs");
 var net = require('net');
-var connection = false;
+//var connection = false;
 
 class Videomatrix extends utils.Adapter {
 
@@ -33,8 +33,11 @@ class Videomatrix extends utils.Adapter {
 
 	initmatrix(){
 		this.log.info('TEST: initmatrix().');
-		this.connection = true;
+		//this.connection = true;
 		adapter.setState('info.connection', true, true);
+		var host = adapter.config.host ? adapter.config.host : '192.168.1.56';
+		var port = adapter.config.port ? adapter.config.port : 23;
+		adapter.log.debug('VideoMatrix.initMatrix() ' + 'connect to: ' + host + ':' + port);
 	}
 	
 	/**
