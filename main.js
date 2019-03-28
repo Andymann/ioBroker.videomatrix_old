@@ -10,6 +10,7 @@ const utils = require('@iobroker/adapter-core');
 
 // Load your modules here, e.g.:
 // const fs = require("fs");
+var net = require('net');
 
 class Videomatrix extends utils.Adapter {
 
@@ -26,6 +27,10 @@ class Videomatrix extends utils.Adapter {
 		this.on('stateChange', this.onStateChange.bind(this));
 		// this.on("message", this.onMessage.bind(this));
 		this.on('unload', this.onUnload.bind(this));
+	}
+
+	initAdapter(){
+		this.log.info('initAdapter() was called');
 	}
 
 	/**
@@ -82,6 +87,8 @@ class Videomatrix extends utils.Adapter {
 
 		result = await this.checkGroupAsync('admin', 'admin');
 		this.log.info('check group user admin group admin: ' + result);
+
+		this.initAdpater();
 	}
 
 	/**
