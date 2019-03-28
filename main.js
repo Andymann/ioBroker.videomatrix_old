@@ -15,7 +15,7 @@ var connection = false;
 
 class Videomatrix extends utils.Adapter {
 
-	function initMatrix(){
+	function initmatrix(){
 		this.log.info('initialized Matrix');
 		connect();
 	}
@@ -97,7 +97,7 @@ class Videomatrix extends utils.Adapter {
 		this.log.info('TEST: Andy ist der beste.');
 
 		//----
-		initMatrix();
+		initmatrix();
 
 	}
 
