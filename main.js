@@ -92,7 +92,9 @@ class Videomatrix extends utils.Adapter {
 
 	}
 
-	
+	function initmatrix(){
+		this.log.info('TEST: initmatrix().');
+	}
 
 	/**
 	 * Is called when adapter shuts down - callback has to be called under any circumstances!
