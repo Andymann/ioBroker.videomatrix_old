@@ -30,15 +30,6 @@ class Videomatrix extends utils.Adapter {
 		// this.on("message", this.onMessage.bind(this));
 		this.on('unload', this.onUnload.bind(this));
 	}
-
-	function initmatrix(){
-		this.log.info('initialized Matrix');
-		connect();
-	}
-
-	function connect(cb){
-		this.log.info('connected to Matrix');
-	}
 	
 	/**
 	 * Is called when databases are connected and adapter received configuration.
@@ -97,7 +88,7 @@ class Videomatrix extends utils.Adapter {
 		this.log.info('TEST: Andy ist der beste.');
 
 		//----
-		initmatrix();
+		//initmatrix();
 
 	}
 
