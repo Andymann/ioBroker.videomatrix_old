@@ -11,6 +11,7 @@ const utils = require('@iobroker/adapter-core');
 // Load your modules here, e.g.:
 // const fs = require("fs");
 var net = require('net');
+var connection = false;
 
 class Videomatrix extends utils.Adapter {
 
@@ -90,8 +91,13 @@ class Videomatrix extends utils.Adapter {
 
 	}
 
-	initMatrix(){
+	function initMatrix(){
 		this.log.info('initialized Matrix');
+		connect();
+	}
+
+	function connect(cb){
+		this.log.info('connected to Matrix');
 	}
 
 	/**

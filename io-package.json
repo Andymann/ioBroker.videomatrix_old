@@ -1,7 +1,7 @@
 {
 	"common": {
 		"name": "videomatrix",
-		"version": "0.0.5",
+		"version": "0.0.5a",
 		"news": {
 			"0.0.1": {
 				"en": "initial release",
