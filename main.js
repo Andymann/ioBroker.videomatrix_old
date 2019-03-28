@@ -19,7 +19,7 @@ class Videomatrix extends utils.Adapter {
 	 */
 	constructor(options) {
 		super({
-//			...options,
+			...options,
 			name: 'videomatrix',
 		});
 		this.on('ready', this.onReady.bind(this));
