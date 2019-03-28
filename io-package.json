@@ -1,0 +1,102 @@
+{
+	"common": {
+		"name": "videomatrix",
+		"version": "0.0.1",
+		"news": {
+			"0.0.1": {
+				"en": "initial release",
+				"de": "Erstveröffentlichung",
+				"ru": "Начальная версия",
+				"pt": "lançamento inicial",
+				"nl": "Eerste uitgave",
+				"fr": "Première version",
+				"it": "Versione iniziale",
+				"es": "Versión inicial",
+				"pl": "Pierwsze wydanie",
+				"zh-cn": "首次出版"
+			}
+		},
+		"title": "BTouch VideoMatrix",
+		"titleLang": {
+			"en": "BTouch VideoMatrix",
+			"de": "BTouch VideoMatrix",
+			"ru": "BTouch VideoMatrix",
+			"pt": "BTouch VideoMatrix",
+			"nl": "BTouch VideoMatrix",
+			"fr": "BTouch VideoMatrix",
+			"it": "BTouch VideoMatrix",
+			"es": "BTouch VideoMatrix",
+			"pl": "BTouch VideoMatrix",
+			"zh-cn": "BTouch VideoMatrix"
+		},
+		"desc": {
+			"en": "Adapter for controlling BTouch VideoMatrix devices",
+			"de": "Adapter zur Steuerung von BTouch VideoMatrix-Geräten",
+			"ru": "Адаптер для управления устройствами BTouch VideoMatrix",
+			"pt": "Adaptador para controlar dispositivos BTouch VideoMatrix",
+			"nl": "Adapter voor het regelen van BTouch VideoMatrix-apparaten",
+			"fr": "Adaptateur pour contrôler les périphériques BTouch VideoMatrix",
+			"it": "Adattatore per il controllo di dispositivi BTouch VideoMatrix",
+			"es": "Adaptador para controlar dispositivos BTouch VideoMatrix",
+			"pl": "Adapter do sterowania urządzeniami BTouch VideoMatrix",
+			"zh-cn": "用于控制BTouch VideoMatrix设备的适配器"
+		},
+		"authors": [
+			"Andy <info@Andyland.info>"
+		],
+		"keywords": [
+			"Video",
+			"BTouch",
+			"HDMI",
+			"SDI"
+		],
+		"license": "MIT",
+		"platform": "Javascript/Node.js",
+		"main": "main.js",
+		"icon": "videomatrix.png",
+		"enabled": true,
+		"extIcon": "https://raw.githubusercontent.com/Andymann/ioBroker.videomatrix/master/admin/videomatrix.png",
+		"readme": "https://github.com/Andymann/ioBroker.videomatrix/blob/master/README.md",
+		"loglevel": "info",
+		"mode": "daemon",
+		"type": "multimedia",
+		"compact": true,
+		"materialize": true,
+		"dependencies": [
+			{
+				"admin": ">=3.0.0"
+			},
+			{
+				"js-controller": ">=1.4.2"
+			}
+		]
+	},
+	"native": {
+		"option1": true,
+		"option2": "42"
+	},
+	"objects": [],
+	"instanceObjects": [
+		{
+			"_id": "info",
+			"type": "channel",
+			"common": {
+				"name": "Information"
+			},
+			"native": {}
+		},
+		{
+			"_id": "info.connection",
+			"type": "state",
+			"common": {
+				"role": "indicator.connected",
+				"name": "Device or service connected",
+				"type": "boolean",
+				"read": true,
+				"write": false,
+				"def": false
+			},
+			"native": {}
+		}
+	]
+}
