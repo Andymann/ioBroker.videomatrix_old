@@ -19,7 +19,7 @@ class Videomatrix extends utils.Adapter {
 	 */
 	constructor(options) {
 		super({
-			//...options,
+			...options,
 			name: 'videomatrix',
 		});
 		this.on('ready', this.onReady.bind(this));
@@ -29,10 +29,7 @@ class Videomatrix extends utils.Adapter {
 		this.on('unload', this.onUnload.bind(this));
 	}
 
-	initAdapter(){
-		this.log.info('initAdapter() was called');
-	}
-
+	
 	/**
 	 * Is called when databases are connected and adapter received configuration.
 	 */
@@ -88,7 +85,6 @@ class Videomatrix extends utils.Adapter {
 		result = await this.checkGroupAsync('admin', 'admin');
 		this.log.info('check group user admin group admin: ' + result);
 
-		this.initAdpater();
 	}
 
 	/**
