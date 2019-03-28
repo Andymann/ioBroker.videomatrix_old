@@ -33,6 +33,7 @@ class Videomatrix extends utils.Adapter {
 
 	initmatrix(){
 		this.log.info('TEST: initmatrix().');
+		connection = true;
 	}
 	
 	/**
