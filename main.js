@@ -30,6 +30,10 @@ class Videomatrix extends utils.Adapter {
 		// this.on("message", this.onMessage.bind(this));
 		this.on('unload', this.onUnload.bind(this));
 	}
+
+	initmatrix(){
+		this.log.info('TEST: initmatrix().');
+	}
 	
 	/**
 	 * Is called when databases are connected and adapter received configuration.
@@ -85,16 +89,13 @@ class Videomatrix extends utils.Adapter {
 
 		result = await this.checkGroupAsync('admin', 'admin');
 		this.log.info('check group user admin group admin: ' + result);
-		this.log.info('TEST: Andy ist der beste.');
-
+		
 		//----
 		this.initmatrix();
 
 	}
 
-	initmatrix(){
-		this.log.info('TEST: initmatrix().');
-	}
+	
 
 	/**
 	 * Is called when adapter shuts down - callback has to be called under any circumstances!
