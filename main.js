@@ -88,7 +88,7 @@ class Videomatrix extends utils.Adapter {
 		this.log.info('TEST: Andy ist der beste.');
 
 		//----
-		//initmatrix();
+		this.initmatrix();
 
 	}
 
