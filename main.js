@@ -15,15 +15,7 @@ var connection = false;
 
 class Videomatrix extends utils.Adapter {
 
-	function initmatrix(){
-		this.log.info('initialized Matrix');
-		connect();
-	}
-
-	function connect(cb){
-		this.log.info('connected to Matrix');
-	}
-
+	
 	/**
 	 * @param {Partial<ioBroker.AdapterOptions>} [options={}]
 	 */
@@ -39,6 +31,14 @@ class Videomatrix extends utils.Adapter {
 		this.on('unload', this.onUnload.bind(this));
 	}
 
+	function initmatrix(){
+		this.log.info('initialized Matrix');
+		connect();
+	}
+
+	function connect(cb){
+		this.log.info('connected to Matrix');
+	}
 	
 	/**
 	 * Is called when databases are connected and adapter received configuration.
