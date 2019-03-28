@@ -92,7 +92,7 @@ class Videomatrix extends utils.Adapter {
 
 	}
 
-	function initmatrix(){
+	initmatrix(){
 		this.log.info('TEST: initmatrix().');
 	}
 
