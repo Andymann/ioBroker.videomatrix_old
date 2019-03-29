@@ -37,5 +37,7 @@ systemDictionary = {
 		'es': 'opcion 2',
 		'pl': 'Opcja 2',
 		'zh-cn': '选项2'
-	}
+	},
+	"host":                   	{"de": "host"},
+	"port":                   	{"de": "port"}
 };
