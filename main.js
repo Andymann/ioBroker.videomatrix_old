@@ -49,8 +49,8 @@ class Videomatrix extends utils.Adapter {
 		this.log.info('VideoMatrix.initMatrix() done.');
 	}
 
-	connectmatrix(){
-		this.log.info('in connect().');
+	connectmatrix(cb){
+		this.log.info('in connect(). cb:' + cb);
 
 	}
 	
