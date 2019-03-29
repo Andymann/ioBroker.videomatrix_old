@@ -44,6 +44,7 @@ class Videomatrix extends utils.Adapter {
 		//var host = adapter.config.host ? adapter.config.host : '192.168.1.56';
 		//var port = adapter.config.port ? adapter.config.port : 23;
 		//adapter.log.info('VideoMatrix.initMatrix() ' + 'connect to: ' + host + ':' + port);
+		connect();
 		this.log.info('VideoMatrix.initMatrix() done.');
 	}
 
