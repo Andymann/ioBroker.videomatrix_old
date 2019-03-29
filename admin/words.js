@@ -41,11 +41,11 @@ systemDictionary = {
 	},
 */
 	'host':	{
-		'en': 'host',
-		'de': 'host'
+		'en': 'Host',
+		'de': 'Host'
 	},
 	'port': {
-		'en': 'port',
-		'de': 'port'
+		'en': 'Port',
+		'de': 'Port'
 	}
 };
