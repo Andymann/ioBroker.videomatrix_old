@@ -14,6 +14,7 @@ systemDictionary = {
 		'pl': 'Ustawienia adaptera dla videomatrix',
 		'zh-cn': 'videomatrix的适配器设置'
 	},
+/*
 	'option1': {
 		'en': 'option1',
 		'de': 'Option 1',
@@ -38,6 +39,13 @@ systemDictionary = {
 		'pl': 'Opcja 2',
 		'zh-cn': '选项2'
 	},
-	"host":                   	{"de": "host"},
-	"port":                   	{"de": "port"}
+*/
+	'host':	{
+		'en': 'host',
+		'de': 'host'
+	},
+	'port': {
+		'en': 'port',
+		'de': 'port'
+	}
 };
