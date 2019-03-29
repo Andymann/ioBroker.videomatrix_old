@@ -15,13 +15,13 @@ const translate = require('./lib/tools').translateText;
 const languages = {
 	en: {},
 	de: {},
-	ru: {},
-	pt: {},
-	nl: {},
-	fr: {},
-	it: {},
-	es: {},
-	pl: {},
+//	ru: {},
+//	pt: {},
+//	nl: {},
+//	fr: {},
+//	it: {},
+//	es: {},
+//	pl: {},
 	'zh-cn': {}
 };
 
