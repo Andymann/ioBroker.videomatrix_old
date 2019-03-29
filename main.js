@@ -12,6 +12,7 @@ const utils = require('@iobroker/adapter-core');
 // const fs = require("fs");
 var net = require('net');
 var matrix;
+var recnt;
 var connection = false;
 var tabu = false;
 var polling_time = 5000;
@@ -49,6 +50,7 @@ class Videomatrix extends utils.Adapter {
 	}
 
 	connect(cb){
+	    this.log.debug('in connect()');
 	    //adapter.config.host = '192.168.1.56';
 	    var in_msg = '';
 	    var host = adapter.config.host;// ? adapter.config.host : '192.168.1.56';
@@ -58,13 +60,13 @@ class Videomatrix extends utils.Adapter {
 //	    var q = VALUE_MAPPINGS[c]['query']['value'];
 //	    var check_cmd = c + ' 00 ' + q;
 	    matrix = net.connect(port, host, function() {
-		adapter.setState('info.connection', true, true);
+		this.setState('info.connection', true, true);
 //		this.log.info('VideoMatrix connected to: ' + host + ':' + port);
 		connection = true;
 		clearInterval(query);
 		query = setInterval(function() {
 		    if(!tabu){
-			this.log.info('Sending QUERY:' + cmdqversion + '.');
+			this.log.debug('Sending QUERY:' + cmdqversion + '.');
 			send(cmdqversion);
 		    }
 		}, polling_time);
@@ -99,8 +101,20 @@ class Videomatrix extends utils.Adapter {
 		if(connection){
 		    err('VideoMatrix disconnected');
 		}
-		//reconnect();
+		reconnect();
 	    });
+	}
+
+	reconnect(){
+	    clearInterval(query);
+	    clearTimeout(recnt);
+	    matrix.destroy();
+	    this.setState('info.connection', false, true);
+	    this.log.info('Reconnect after 15 sec...');
+	    connection = false;
+	    recnt = setTimeout(function() {
+		connect();
+	    }, 15000);
 	}
 	
 	/**
