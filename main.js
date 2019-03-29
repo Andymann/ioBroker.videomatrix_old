@@ -49,7 +49,7 @@ class Videomatrix extends utils.Adapter {
 		this.log.info('VideoMatrix.initMatrix() done.');
 	}
 
-	connect(cb){
+	connect(/*cb*/){
 	    this.log.debug('in connect()');
 	    //adapter.config.host = '192.168.1.56';
 	    var in_msg = '';
