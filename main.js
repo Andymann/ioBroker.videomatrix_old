@@ -41,29 +41,8 @@ class Videomatrix extends utils.Adapter {
 		this.on('stateChange', this.onStateChange.bind(this));
 		//this.on("message", this.onMessage.bind(this));
 		this.on('unload', this.onUnload.bind(this));
-		//adapter.subscribestates('*');
 
 		parentThis = this;
-/*
-		testx = function() {
-			parentThis.setState('info.connection', true, true);
-			parentThis.log.info('VideoMatrix connected');
-			connection = true;
-			clearInterval(query);
-			query = setInterval(function() {
-			    if(!tabu){
-				//this.log.debug('Sending QUERY:' + cmdqversion + '.');
-				//send(cmdqversion);
-				
-				var cmd = cmdqversion + '\n\r';
-				matrix.write(cmd);
-				tabu = false;
-				
-			    }
-			}, polling_time);
-			if(cb){cb();}
-		};
-*/
 	}
 
 	
@@ -71,16 +50,12 @@ class Videomatrix extends utils.Adapter {
 	initmatrix(){
 		this.log.info('TEST: initmatrix().');
 		//this.connection = true;
-//		this.setState('info.connection', true, true);
 		//var host = adapter.config.host ? adapter.config.host : '192.168.1.56';
 		//var port = adapter.config.port ? adapter.config.port : 23;
 		//adapter.log.info('VideoMatrix.initMatrix() ' + 'connect to: ' + host + ':' + port);
 		this.connectmatrix();
 		this.log.info('VideoMatrix.initMatrix() done.');
 	}
-
-	
-	
 
 	connectmatrix(cb){
 		this.log.info('in connect().');
@@ -113,34 +88,24 @@ class Videomatrix extends utils.Adapter {
 			if(cb){cb();}
 	
 		});
-		this.log.info('VideoMatrix in net.connect().2');
+		//this.log.info('VideoMatrix in net.connect().2');
 
 		matrix.on('data', function(chunk) {
 			in_msg += chunk;
 			parentThis.log.info("VideoMatrix incomming: " + in_msg);
-			// Version: V2.6.152
-			//if(in_msg[1] =='V'){
-			    	//if(in_msg.length > 10){
-				//	in_msg = in_msg.substring(0,10);
-			    	//}
-			    	//adapter.log.debug("VideoMatrix incomming: " + in_msg);
-			    	//parse(in_msg);
-			    	//in_msg = '';
-				//await this.setStateAsync('info.connection', { val: true, ack: true });
-			//	connection = true;
-			//}
+			
+			if(!connection){
+				if(in_msg.length > 15){
+					//parentThis.setState('info.connection', true, true);
 
-			if(in_msg.length > 15){
-				//this.log.info('VideoMatrix incomming changed: ${JSON.stringify(obj)}`;
-				parentThis.setState('info.connection', true, true);
-
-				if(in_msg.toLowerCase().indexOf('version')>-1){
-					parentThis.setState('info.connection', true, true);
-					parentThis.log.info('VideoMatrix connected');
-					connection = true;
+					//----// Version: V2.6.152
+					if(in_msg.toLowerCase().indexOf('version')>-1){
+						parentThis.setState('info.connection', true, true);
+						parentThis.log.info('VideoMatrix connected');
+						connection = true;
+					}
+					in_msg = '';
 				}
-				in_msg = '';
-
 			}
 
 		});
