@@ -44,7 +44,7 @@ class Videomatrix extends utils.Adapter {
 		//adapter.subscribestates('*');
 
 		parentThis = this;
-
+/*
 		testx = function() {
 			parentThis.setState('info.connection', true, true);
 			parentThis.log.info('VideoMatrix connected');
@@ -63,6 +63,7 @@ class Videomatrix extends utils.Adapter {
 			}, polling_time);
 			if(cb){cb();}
 		};
+*/
 	}
 
 	
@@ -90,9 +91,9 @@ class Videomatrix extends utils.Adapter {
 		//this.setState('info.connection', true, true);
 
 		matrix = new net.Socket();
-		matrix.connect(this.config.port, this.config.host, testx);
+		//matrix.connect(this.config.port, this.config.host, testx(cb));
 
-/*
+
 		matrix.connect(this.config.port, this.config.host, function() {
 			parentThis.setState('info.connection', true, true);
 			parentThis.log.info('VideoMatrix connected');
@@ -112,7 +113,7 @@ class Videomatrix extends utils.Adapter {
 			if(cb){cb();}
 	
 		});
-*/
+
 
 
 		this.log.info('VideoMatrix in net.connect().2');
