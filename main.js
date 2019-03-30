@@ -94,7 +94,7 @@ class Videomatrix extends utils.Adapter {
 
 		matrix.on('data', function(chunk) {
 			in_msg += chunk;
-			this.log.debug("VideoMatrix incomming: " + in_msg);
+			this.log.info("VideoMatrix incomming: " + in_msg);
 
 
 /*
