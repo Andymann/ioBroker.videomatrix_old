@@ -59,15 +59,15 @@ class Videomatrix extends utils.Adapter {
 		matrix = net.connect(port, host, function() {
 			//this.setState('info.connection', true, true);
 			this.log.info('VideoMatrix in net.connect().');
-			connection = true;
-			clearInterval(query);
-			query = setInterval(function() {
-			    if(!tabu){
-				this.log.debug('Sending QUERY:' + cmdqversion + '.');
-				send(cmdqversion);
-			    }
-			}, polling_time);
-			if(cb){cb();}
+//			connection = true;
+//			clearInterval(query);
+//			query = setInterval(function() {
+//			    if(!tabu){
+//				this.log.debug('Sending QUERY:' + cmdqversion + '.');
+//				send(cmdqversion);
+//			    }
+//			}, polling_time);
+//			if(cb){cb();}
 	    	});
 /*
 		matrix.on('data', function(chunk) {
