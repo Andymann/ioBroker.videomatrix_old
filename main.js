@@ -94,7 +94,7 @@ class Videomatrix extends utils.Adapter {
 
 		matrix.on('data', function(chunk) {
 			in_msg += chunk;
-			this.log.info("VideoMatrix incomming: " + in_msg);
+			//this.log.info("VideoMatrix incomming: " + in_msg);
 
 
 /*
@@ -112,7 +112,7 @@ class Videomatrix extends utils.Adapter {
 */
 		});
 
-/*
+
 		matrix.on('error', function(e) {
 			if (e.code == "ENOTFOUND" || e.code == "ECONNREFUSED" || e.code == "ETIMEDOUT") {
 				matrix.destroy();
@@ -126,7 +126,7 @@ class Videomatrix extends utils.Adapter {
 			}
 			reconnect();
 		});
-*/
+
 	}
 
 	reconnect(){
