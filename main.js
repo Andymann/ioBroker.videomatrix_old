@@ -18,7 +18,7 @@ var tabu = false;
 var polling_time = 5000;
 var query = null;
 var cmdqversion = '/^Version;';
-
+var in_msg = '';
 //var connection = false;
 
 class Videomatrix extends utils.Adapter {
@@ -52,7 +52,7 @@ class Videomatrix extends utils.Adapter {
 
 	connectmatrix(cb){
 		this.log.info('in connect().');
- 		var in_msg = '';
+ 		
 		var host = this.config.host ? this.config.host : '192.168.1.56';
 		var port = this.config.port ? this.config.port : 23;
 		this.log.info('VideoMatrix connecting to: ' + this.config.host + ':' + this.config.port);
