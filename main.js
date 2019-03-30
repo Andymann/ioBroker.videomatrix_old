@@ -115,6 +115,7 @@ class Videomatrix extends utils.Adapter {
 		});
 
 		if(connection){
+			this.log.info('Matrix CONNEECTED');
 			this.setState('info.connection', true, true);
 		}
 
