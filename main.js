@@ -111,7 +111,8 @@ class Videomatrix extends utils.Adapter {
 				//this.setState('info.connection', true, true);
 				if(in_msg.includes('V')){
 					connection = true;
-			    	in_msg = '';
+			    		in_msg = '';
+				}
 			}
 
 		});
