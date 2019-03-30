@@ -106,14 +106,14 @@ class Videomatrix extends utils.Adapter {
 				//await this.setStateAsync('info.connection', { val: true, ack: true });
 			//	connection = true;
 			//}
-			if(in_msg.indexOf('V')>-1){
+			if(in_msg.toString().indexOf('e')>-1){
 					connection = true;
 			    		//in_msg = '';
 				}
 			if(in_msg.length > 15){
 				//this.log.info('VideoMatrix incomming changed: ${JSON.stringify(obj)}`;
 				//this.setState('info.connection', true, true);
-				if(in_msg.toString().includes('V')){
+				if(in_msg.toString().indexOf('e')>-1){
 					connection = true;
 			    		in_msg = '';
 				}
