@@ -41,7 +41,7 @@ class Videomatrix extends utils.Adapter {
 	initmatrix(){
 		this.log.info('TEST: initmatrix().');
 		//this.connection = true;
-		this.setState('info.connection', true, true);
+		//this.setState('info.connection', true, true);
 		//var host = adapter.config.host ? adapter.config.host : '192.168.1.56';
 		//var port = adapter.config.port ? adapter.config.port : 23;
 		//adapter.log.info('VideoMatrix.initMatrix() ' + 'connect to: ' + host + ':' + port);
@@ -51,10 +51,71 @@ class Videomatrix extends utils.Adapter {
 
 	connectmatrix(cb){
 		this.log.info('in connect(). cb:' + cb);
+ 		var in_msg = '';
+		var host = adapter.config.host;// ? adapter.config.host : '192.168.1.56';
+		var port = adapter.config.port;// ? adapter.config.port : 23;
+		this.log.debug('VideoMatrix connecting to: ' + host + ':' + port);
 
+		matrix = net.connect(port, host, function() {
+			this.setState('info.connection', true, true);
+//			this.log.info('VideoMatrix connected to: ' + host + ':' + port);
+			connection = true;
+			clearInterval(query);
+			query = setInterval(function() {
+			    if(!tabu){
+				this.log.debug('Sending QUERY:' + cmdqversion + '.');
+				send(cmdqversion);
+			    }
+			}, polling_time);
+			if(cb){cb();}
+	    	});
+		matrix.on('data', function(chunk) {
+			in_msg += chunk;
+			this.log.debug("VideoMatrix incomming: " + in_msg);
+/*
+		if(in_msg[9] =='x'){
+		    if(in_msg.length > 10){
+			in_msg = in_msg.substring(0,10);
+		    }
+		    adapter.log.debug("VideoMatrix incomming: " + in_msg);
+		    parse(in_msg);
+		    in_msg = '';
+		}
+		if(in_msg.length > 15){
+		    in_msg = '';
+		}
+*/
+		});
+
+		matrix.on('error', function(e) {
+			if (e.code == "ENOTFOUND" || e.code == "ECONNREFUSED" || e.code == "ETIMEDOUT") {
+				matrix.destroy();
+			}
+			err(e);
+		});
+
+		matrix.on('close', function(e) {
+			if(connection){
+				err('VideoMatrix disconnected');
+			}
+			reconnect();
+		});
 	}
-	
-	
+
+	reconnect(){
+	    clearInterval(query);
+	    clearTimeout(recnt);
+	    matrix.destroy();
+	    this.setState('info.connection', false, true);
+	    this.log.info('Reconnect after 15 sec...');
+	    connection = false;
+	    recnt = setTimeout(function() {
+		connect();
+	    }, 15000);
+	}
+
+
+
 	/**
 	 * Is called when databases are connected and adapter received configuration.
 	 */
