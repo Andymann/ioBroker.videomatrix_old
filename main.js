@@ -95,9 +95,9 @@ class Videomatrix extends utils.Adapter {
 
 
 		matrix.connect(this.config.port, this.config.host, function() {
-			parentThis.setState('info.connection', true, true);
-			parentThis.log.info('VideoMatrix connected');
-			connection = true;
+			//parentThis.setState('info.connection', true, true);
+			//parentThis.log.info('VideoMatrix connected');
+			//connection = true;
 			clearInterval(query);
 			query = setInterval(function() {
 			    if(!tabu){
@@ -113,12 +113,7 @@ class Videomatrix extends utils.Adapter {
 			if(cb){cb();}
 	
 		});
-
-
-
 		this.log.info('VideoMatrix in net.connect().2');
-
-
 
 		matrix.on('data', function(chunk) {
 			in_msg += chunk;
@@ -134,19 +129,18 @@ class Videomatrix extends utils.Adapter {
 				//await this.setStateAsync('info.connection', { val: true, ack: true });
 			//	connection = true;
 			//}
-			if(in_msg.toString().indexOf('e')>-1){
-					this.connection = true;
-			    		//in_msg = '';
-				}
+
 			if(in_msg.length > 15){
 				//this.log.info('VideoMatrix incomming changed: ${JSON.stringify(obj)}`;
 				parentThis.setState('info.connection', true, true);
-/*
-				if(in_msg.toString().indexOf('e')>-1){
-					this.connection = true;
-			    		in_msg = '';
+
+				if(in_msg.toLowerCase().indexOf('version')>-1){
+					parentThis.setState('info.connection', true, true);
+					parentThis.log.info('VideoMatrix connected');
+					connection = true;
 				}
-*/
+				in_msg = '';
+
 			}
 
 		});
