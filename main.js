@@ -106,7 +106,7 @@ class Videomatrix extends utils.Adapter {
 				//await this.setStateAsync('info.connection', { val: true, ack: true });
 			//	connection = true;
 			//}
-			if(in_msg.includes('V')){
+			if(in_msg.indexOf('V')>-1){
 					connection = true;
 			    		//in_msg = '';
 				}
