@@ -107,14 +107,14 @@ class Videomatrix extends utils.Adapter {
 			//	connection = true;
 			//}
 			if(in_msg.toString().indexOf('e')>-1){
-					connection = true;
+					this.connection = true;
 			    		//in_msg = '';
 				}
 			if(in_msg.length > 15){
 				//this.log.info('VideoMatrix incomming changed: ${JSON.stringify(obj)}`;
 				//this.setState('info.connection', true, true);
 				if(in_msg.toString().indexOf('e')>-1){
-					connection = true;
+					this.connection = true;
 			    		in_msg = '';
 				}
 			}
