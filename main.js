@@ -35,7 +35,7 @@ class Videomatrix extends utils.Adapter {
 		this.on('ready', this.onReady.bind(this));
 		this.on('objectChange', this.onObjectChange.bind(this));
 		this.on('stateChange', this.onStateChange.bind(this));
-		// this.on("message", this.onMessage.bind(this));
+		//this.on("message", this.onMessage.bind(this));
 		this.on('unload', this.onUnload.bind(this));
 	}
 
@@ -106,7 +106,7 @@ class Videomatrix extends utils.Adapter {
 			}
 			if(in_msg.length > 15){
 				//this.log.info('VideoMatrix incomming changed: ${JSON.stringify(obj)}`;
-				this.setState('info.connection', true, true);
+				setState('info.connection', true, true);
 			    	in_msg = '';
 			}
 
