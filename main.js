@@ -40,26 +40,28 @@ class Videomatrix extends utils.Adapter {
 		//this.on("message", this.onMessage.bind(this));
 		this.on('unload', this.onUnload.bind(this));
 		//adapter.subscribestates('*');
+
+		testx = function() {
+			this.setState('info.connection', true, true);
+			this.log.info('VideoMatrix connected');
+			connection = true;
+			clearInterval(query);
+			query = setInterval(function() {
+			    if(!tabu){
+				//this.log.debug('Sending QUERY:' + cmdqversion + '.');
+				//send(cmdqversion);
+				
+				var cmd = cmdqversion + '\n\r';
+				matrix.write(cmd);
+				tabu = false;
+				
+			    }
+			}, polling_time);
+			if(cb){cb();}
+		};
 	}
 
-	testx = function() {
-		this.setState('info.connection', true, true);
-		this.log.info('VideoMatrix connected');
-		connection = true;
-		clearInterval(query);
-		query = setInterval(function() {
-		    if(!tabu){
-			//this.log.debug('Sending QUERY:' + cmdqversion + '.');
-			//send(cmdqversion);
-			
-			var cmd = cmdqversion + '\n\r';
-			matrix.write(cmd);
-			tabu = false;
-			
-		    }
-		}, polling_time);
-		if(cb){cb();}
-	};
+	
 
 	initmatrix(){
 		this.log.info('TEST: initmatrix().');
