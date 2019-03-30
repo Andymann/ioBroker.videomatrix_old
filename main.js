@@ -56,9 +56,9 @@ class Videomatrix extends utils.Adapter {
 		var port = this.config.port ? this.config.port : 23;
 		this.log.info('VideoMatrix connecting to: ' + this.config.host + ':' + this.config.port);
 
-		matrix = net.connect(port, host, function() {
+//		matrix = net.connect(port, host, function() {
 			//this.setState('info.connection', true, true);
-			this.log.info('VideoMatrix in net.connect().');
+//			this.log.info('VideoMatrix in net.connect().');
 //			connection = true;
 //			clearInterval(query);
 //			query = setInterval(function() {
@@ -68,7 +68,7 @@ class Videomatrix extends utils.Adapter {
 //			    }
 //			}, polling_time);
 //			if(cb){cb();}
-	    	});
+//	    	});
 /*
 		matrix.on('data', function(chunk) {
 			in_msg += chunk;
