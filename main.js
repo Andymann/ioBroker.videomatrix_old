@@ -50,7 +50,7 @@ class Videomatrix extends utils.Adapter {
 	}
 
 	connectmatrix(cb){
-		this.log.info('in connect(). cb:' + cb);
+		this.log.info('in connect().');
  		var in_msg = '';
 		var host = this.config.host ? this.config.host : '192.168.1.56';
 		var port = this.config.port ? this.config.port : 23;
