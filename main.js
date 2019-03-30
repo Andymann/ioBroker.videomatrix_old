@@ -88,7 +88,7 @@ class Videomatrix extends utils.Adapter {
 		    in_msg = '';
 		}
 */
-		});
+//		});
 
 /*
 		matrix.on('error', function(e) {
