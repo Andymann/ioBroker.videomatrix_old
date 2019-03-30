@@ -57,11 +57,13 @@ class Videomatrix extends utils.Adapter {
 		var host = this.config.host ? this.config.host : '192.168.1.56';
 		var port = this.config.port ? this.config.port : 23;
 		this.log.info('VideoMatrix connecting to: ' + this.config.host + ':' + this.config.port);
-		this.setState('info.connection', true, true);
+		//this.setState('info.connection', true, true);
 
 		matrix = new net.Socket();
 		matrix.connect(this.config.port, this.config.host, function() {
-			//connection = true;
+			this.setState('info.connection', true, true);
+			this.log.info('VideoMatrix connected');
+			this.connection = true;
 			clearInterval(query);
 			query = setInterval(function() {
 			    if(!tabu){
@@ -79,23 +81,11 @@ class Videomatrix extends utils.Adapter {
 		});
 		this.log.info('VideoMatrix in net.connect().2');
 
-//		matrix = net.connect(port, host, function() {
-			//this.setState('info.connection', true, true);
-//			this.log.info('VideoMatrix in net.connect().');
-//			connection = true;
-//			clearInterval(query);
-//			query = setInterval(function() {
-//			    if(!tabu){
-//				this.log.debug('Sending QUERY:' + cmdqversion + '.');
-//				send(cmdqversion);
-//			    }
-//			}, polling_time);
-//			if(cb){cb();}
-//	    	});
+
 
 		matrix.on('data', function(chunk) {
 			in_msg += chunk;
-			//this.log.info("VideoMatrix incomming: " + in_msg);
+			adapter.log.info("VideoMatrix incomming: " + in_msg);
 			// Version: V2.6.152
 			//if(in_msg[1] =='V'){
 			    	//if(in_msg.length > 10){
