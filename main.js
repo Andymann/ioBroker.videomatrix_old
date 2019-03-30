@@ -51,7 +51,7 @@ class Videomatrix extends utils.Adapter {
 		this.log.info('VideoMatrix.initMatrix() done.');
 	}
 
-	connectmatrix(cb){
+	async connectmatrix(cb){
 		this.log.info('in connect().');
  		
 		var host = this.config.host ? this.config.host : '192.168.1.56';
