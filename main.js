@@ -43,7 +43,7 @@ class Videomatrix extends utils.Adapter {
 	initmatrix(){
 		this.log.info('TEST: initmatrix().');
 		//this.connection = true;
-		//this.setState('info.connection', true, true);
+		this.setState('info.connection', true, true);
 		//var host = adapter.config.host ? adapter.config.host : '192.168.1.56';
 		//var port = adapter.config.port ? adapter.config.port : 23;
 		//adapter.log.info('VideoMatrix.initMatrix() ' + 'connect to: ' + host + ':' + port);
@@ -51,7 +51,7 @@ class Videomatrix extends utils.Adapter {
 		this.log.info('VideoMatrix.initMatrix() done.');
 	}
 
-	async connectmatrix(cb){
+	connectmatrix(cb){
 		this.log.info('in connect().');
  		
 		var host = this.config.host ? this.config.host : '192.168.1.56';
@@ -68,7 +68,6 @@ class Videomatrix extends utils.Adapter {
 				//send(cmdqversion);
 				
 				var cmd = cmdqversion + '\n\r';
-				//adapter.log.debug('Send Command: ' + cmd);
 				matrix.write(cmd);
 				tabu = false;
 				
