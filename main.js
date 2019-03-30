@@ -104,6 +104,7 @@ class Videomatrix extends utils.Adapter {
 			    	//parse(in_msg);
 			    	//in_msg = '';
 				//await this.setStateAsync('info.connection', { val: true, ack: true });
+				connection = true;
 			}
 			if(in_msg.length > 15){
 				//this.log.info('VideoMatrix incomming changed: ${JSON.stringify(obj)}`;
@@ -112,6 +113,10 @@ class Videomatrix extends utils.Adapter {
 			}
 
 		});
+
+		if(connection){
+			this.setState('info.connection', true, true);
+		}
 
 
 		matrix.on('error', function(e) {
