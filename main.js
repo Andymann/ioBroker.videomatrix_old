@@ -18,6 +18,7 @@ var tabu = false;
 var polling_time = 5000;
 var query = null;
 var cmdqversion = '/^Version;';
+
 //var connection = false;
 
 class Videomatrix extends utils.Adapter {
@@ -64,12 +65,12 @@ class Videomatrix extends utils.Adapter {
 			    if(!tabu){
 				//this.log.debug('Sending QUERY:' + cmdqversion + '.');
 				//send(cmdqversion);
-				if (cmd !== undefined){
-					cmd = cmd + '\n\r';
-					//adapter.log.debug('Send Command: ' + cmd);
-					matrix.write(cmd);
-					tabu = false;
-				}
+				
+				var cmd = cmdqversion + '\n\r';
+				//adapter.log.debug('Send Command: ' + cmd);
+				matrix.write(cmd);
+				tabu = false;
+				
 			    }
 			}, polling_time);
 			if(cb){cb();}
