@@ -91,11 +91,11 @@ class Videomatrix extends utils.Adapter {
 //			}, polling_time);
 //			if(cb){cb();}
 //	    	});
-/*
+
 		matrix.on('data', function(chunk) {
 			in_msg += chunk;
 			this.log.debug("VideoMatrix incomming: " + in_msg);
-*/
+
 
 /*
 		if(in_msg[9] =='x'){
@@ -110,7 +110,7 @@ class Videomatrix extends utils.Adapter {
 		    in_msg = '';
 		}
 */
-//		});
+		});
 
 /*
 		matrix.on('error', function(e) {
