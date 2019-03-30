@@ -57,7 +57,7 @@ class Videomatrix extends utils.Adapter {
 		var host = this.config.host ? this.config.host : '192.168.1.56';
 		var port = this.config.port ? this.config.port : 23;
 		this.log.info('VideoMatrix connecting to: ' + this.config.host + ':' + this.config.port);
-		adapter.setState('info.connection', true, true);
+		this.setState('info.connection', true, true);
 
 		matrix = new net.Socket();
 		matrix.connect(this.config.port, this.config.host, function() {
