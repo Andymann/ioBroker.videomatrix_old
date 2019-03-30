@@ -8,6 +8,7 @@
 // you need to create an adapter
 const utils = require('@iobroker/adapter-core');
 var adapter = utils.adapter('videomatrix');
+
 // Load your modules here, e.g.:
 // const fs = require("fs");
 var net = require('net');
@@ -19,7 +20,8 @@ var polling_time = 5000;
 var query = null;
 var cmdqversion = '/^Version;';
 var in_msg = '';
-//var connection = false;
+
+var testx;
 
 class Videomatrix extends utils.Adapter {
 
@@ -40,21 +42,10 @@ class Videomatrix extends utils.Adapter {
 		//adapter.subscribestates('*');
 	}
 
-	initmatrix(){
-		this.log.info('TEST: initmatrix().');
-		//this.connection = true;
-//		this.setState('info.connection', true, true);
-		//var host = adapter.config.host ? adapter.config.host : '192.168.1.56';
-		//var port = adapter.config.port ? adapter.config.port : 23;
-		//adapter.log.info('VideoMatrix.initMatrix() ' + 'connect to: ' + host + ':' + port);
-		this.connectmatrix();
-		this.log.info('VideoMatrix.initMatrix() done.');
-	}
-
-	var testx = function{
+	testx = function() {
 		this.setState('info.connection', true, true);
-		adapter.log.info('VideoMatrix connected');
-		this.connection = true;
+		this.log.info('VideoMatrix connected');
+		connection = true;
 		clearInterval(query);
 		query = setInterval(function() {
 		    if(!tabu){
@@ -68,7 +59,21 @@ class Videomatrix extends utils.Adapter {
 		    }
 		}, polling_time);
 		if(cb){cb();}
+	};
+
+	initmatrix(){
+		this.log.info('TEST: initmatrix().');
+		//this.connection = true;
+//		this.setState('info.connection', true, true);
+		//var host = adapter.config.host ? adapter.config.host : '192.168.1.56';
+		//var port = adapter.config.port ? adapter.config.port : 23;
+		//adapter.log.info('VideoMatrix.initMatrix() ' + 'connect to: ' + host + ':' + port);
+		this.connectmatrix();
+		this.log.info('VideoMatrix.initMatrix() done.');
 	}
+
+	
+	
 
 	connectmatrix(cb){
 		this.log.info('in connect().');
@@ -80,11 +85,12 @@ class Videomatrix extends utils.Adapter {
 
 		matrix = new net.Socket();
 		matrix.connect(this.config.port, this.config.host, testx);
+
 /*
 		matrix.connect(this.config.port, this.config.host, function() {
 			adapter.this.setState('info.connection', true, true);
 			adapter.log.info('VideoMatrix connected');
-			this.connection = true;
+			connection = true;
 			clearInterval(query);
 			query = setInterval(function() {
 			    if(!tabu){
@@ -101,6 +107,8 @@ class Videomatrix extends utils.Adapter {
 	
 		});
 */
+
+
 		this.log.info('VideoMatrix in net.connect().2');
 
 
