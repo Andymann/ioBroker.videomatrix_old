@@ -63,7 +63,7 @@ class Videomatrix extends utils.Adapter {
 			query = setInterval(function() {
 			    if(!tabu){
 				//this.log.debug('Sending QUERY:' + cmdqversion + '.');
-				this.send(cmdqversion);
+				send(cmdqversion);
 			    }
 			}, polling_time);
 			if(cb){cb();}
@@ -134,7 +134,7 @@ class Videomatrix extends utils.Adapter {
 	    }, 15000);
 	}
 
-	send(cmd){
+	function send(cmd){
 		this.log.info('VideoMatrix send:' + cmd);
 		if (cmd !== undefined){
 			cmd = cmd + '\n\r';
