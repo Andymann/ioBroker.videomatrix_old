@@ -122,7 +122,7 @@ class Videomatrix extends utils.Adapter {
 
 		matrix.on('data', function(chunk) {
 			in_msg += chunk;
-			adapter.log.info("VideoMatrix incomming: " + in_msg);
+			parentThis.log.info("VideoMatrix incomming: " + in_msg);
 			// Version: V2.6.152
 			//if(in_msg[1] =='V'){
 			    	//if(in_msg.length > 10){
@@ -140,11 +140,13 @@ class Videomatrix extends utils.Adapter {
 				}
 			if(in_msg.length > 15){
 				//this.log.info('VideoMatrix incomming changed: ${JSON.stringify(obj)}`;
-				//this.setState('info.connection', true, true);
+				parentThis.setState('info.connection', true, true);
+/*
 				if(in_msg.toString().indexOf('e')>-1){
 					this.connection = true;
 			    		in_msg = '';
 				}
+*/
 			}
 
 		});
