@@ -95,21 +95,21 @@ class Videomatrix extends utils.Adapter {
 		matrix.on('data', function(chunk) {
 			in_msg += chunk;
 			//this.log.info("VideoMatrix incomming: " + in_msg);
+			// Version: V2.6.152
+			if(in_msg[0] =='V'){
+			    	//if(in_msg.length > 10){
+				//	in_msg = in_msg.substring(0,10);
+			    	//}
+			    	//adapter.log.debug("VideoMatrix incomming: " + in_msg);
+			    	//parse(in_msg);
+			    	//in_msg = '';
+			}
+			if(in_msg.length > 15){
+				//this.log.info('VideoMatrix incomming changed: ${JSON.stringify(obj)}`;
+				this.setState('info.connection', true, true);
+			    	in_msg = '';
+			}
 
-
-/*
-		if(in_msg[9] =='x'){
-		    if(in_msg.length > 10){
-			in_msg = in_msg.substring(0,10);
-		    }
-		    adapter.log.debug("VideoMatrix incomming: " + in_msg);
-		    parse(in_msg);
-		    in_msg = '';
-		}
-		if(in_msg.length > 15){
-		    in_msg = '';
-		}
-*/
 		});
 
 
