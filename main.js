@@ -96,7 +96,7 @@ class Videomatrix extends utils.Adapter {
 			in_msg += chunk;
 			//this.log.info("VideoMatrix incomming: " + in_msg);
 			// Version: V2.6.152
-			if(in_msg[1] =='V'){
+			//if(in_msg[1] =='V'){
 			    	//if(in_msg.length > 10){
 				//	in_msg = in_msg.substring(0,10);
 			    	//}
@@ -104,17 +104,19 @@ class Videomatrix extends utils.Adapter {
 			    	//parse(in_msg);
 			    	//in_msg = '';
 				//await this.setStateAsync('info.connection', { val: true, ack: true });
-				connection = true;
-			}
+			//	connection = true;
+			//}
 			if(in_msg.length > 15){
 				//this.log.info('VideoMatrix incomming changed: ${JSON.stringify(obj)}`;
 				//this.setState('info.connection', true, true);
+				if(in_msg.includes('V')){
+					connection = true;
 			    	in_msg = '';
 			}
 
 		});
 
-		if(connection){
+		if(connection==true){
 			this.log.info('Matrix CONNECTED');
 			this.setState('info.connection', true, true);
 		}
