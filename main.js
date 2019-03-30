@@ -60,7 +60,7 @@ class Videomatrix extends utils.Adapter {
 
 		matrix = new net.Socket();
 		matrix.connect(this.config.port, this.config.host, function() {
-			connection = true;
+			//connection = true;
 			clearInterval(query);
 			query = setInterval(function() {
 			    if(!tabu){
