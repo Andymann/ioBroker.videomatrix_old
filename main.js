@@ -58,10 +58,10 @@ class Videomatrix extends utils.Adapter {
 
 		matrix = new net.Socket();
 		matrix.connect(this.config.port, this.config.host, function() {
-			//this.log.info('VideoMatrix in net.connect().');
+			adapter.log.info('VideoMatrix in net.connect().1');
 	
 		});
-		this.log.info('VideoMatrix in net.connect().');
+		this.log.info('VideoMatrix in net.connect().2');
 
 //		matrix = net.connect(port, host, function() {
 			//this.setState('info.connection', true, true);
