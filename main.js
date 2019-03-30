@@ -134,6 +134,15 @@ class Videomatrix extends utils.Adapter {
 	    }, 15000);
 	}
 
+	send(cmd){
+		this.log.info('VideoMatrix send:' + cmd);
+		if (cmd !== undefined){
+			cmd = cmd + '\n\r';
+			//adapter.log.debug('Send Command: ' + cmd);
+			matrix.write(cmd);
+			tabu = false;
+		}
+	}
 
 
 	/**
