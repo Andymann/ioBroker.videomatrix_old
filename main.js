@@ -22,9 +22,11 @@ var cmdqversion = '/^Version;';
 var in_msg = '';
 
 var testx;
+var parentThis;
 
 class Videomatrix extends utils.Adapter {
 
+	
 	
 	/**
 	 * @param {Partial<ioBroker.AdapterOptions>} [options={}]
@@ -41,9 +43,11 @@ class Videomatrix extends utils.Adapter {
 		this.on('unload', this.onUnload.bind(this));
 		//adapter.subscribestates('*');
 
+		parentThis = this;
+
 		testx = function() {
-			this.setState('info.connection', true, true);
-			this.log.info('VideoMatrix connected');
+			parentThis.setState('info.connection', true, true);
+			parentThis.log.info('VideoMatrix connected');
 			connection = true;
 			clearInterval(query);
 			query = setInterval(function() {
@@ -90,8 +94,8 @@ class Videomatrix extends utils.Adapter {
 
 /*
 		matrix.connect(this.config.port, this.config.host, function() {
-			adapter.this.setState('info.connection', true, true);
-			adapter.log.info('VideoMatrix connected');
+			parentThis.setState('info.connection', true, true);
+			parentThis.log.info('VideoMatrix connected');
 			connection = true;
 			clearInterval(query);
 			query = setInterval(function() {
