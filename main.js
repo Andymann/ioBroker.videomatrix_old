@@ -61,8 +61,8 @@ class Videomatrix extends utils.Adapter {
 
 		matrix = new net.Socket();
 		matrix.connect(this.config.port, this.config.host, function() {
-			this.setState('info.connection', true, true);
-			this.log.info('VideoMatrix connected');
+			adapter.setState('info.connection', true, true);
+			adapter.log.info('VideoMatrix connected');
 			this.connection = true;
 			clearInterval(query);
 			query = setInterval(function() {
