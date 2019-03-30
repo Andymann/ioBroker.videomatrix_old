@@ -113,7 +113,7 @@ class Videomatrix extends utils.Adapter {
 			if(in_msg.length > 15){
 				//this.log.info('VideoMatrix incomming changed: ${JSON.stringify(obj)}`;
 				//this.setState('info.connection', true, true);
-				if(in_msg.includes('V')){
+				if(in_msg.toString().includes('V')){
 					connection = true;
 			    		in_msg = '';
 				}
