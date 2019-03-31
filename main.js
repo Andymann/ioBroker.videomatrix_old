@@ -49,46 +49,28 @@ class Videomatrix extends utils.Adapter {
 
 	initmatrix(){
 		this.log.info('TEST: initmatrix().');
-		//this.connection = true;
-		//var host = adapter.config.host ? adapter.config.host : '192.168.1.56';
-		//var port = adapter.config.port ? adapter.config.port : 23;
-		//adapter.log.info('VideoMatrix.initMatrix() ' + 'connect to: ' + host + ':' + port);
-		this.connectmatrix();
-		this.log.info('VideoMatrix.initMatrix() done.');
+		this.connectmatrix();		
 	}
 
 	connectmatrix(cb){
-		this.log.info('in connect().');
+		this.log.info('connectMatrix().');
  		
 		var host = this.config.host ? this.config.host : '192.168.1.56';
 		var port = this.config.port ? this.config.port : 23;
 		this.log.info('VideoMatrix connecting to: ' + this.config.host + ':' + this.config.port);
-		//this.setState('info.connection', true, true);
 
 		matrix = new net.Socket();
-		//matrix.connect(this.config.port, this.config.host, testx(cb));
-
-		if(connection == false ){
-			matrix.connect(this.config.port, this.config.host, function() {
-				//parentThis.setState('info.connection', true, true);
-				//parentThis.log.info('VideoMatrix connected');
-				//connection = true;
-				clearInterval(query);
-				query = setInterval(function() {
-				    if(!tabu){
-					//this.log.debug('Sending QUERY:' + cmdqversion + '.');
-					parentThis.send(cmdqversion);
-				    }
-				}, polling_time);
-				if(cb){cb();}
-		
-			});
-
-			if(connection == true){
-				parentThis.setState('info.connection', true, true);
-				parentThis.log.info('VideoMatrix connected');
-			}
-		}
+		matrix.connect(this.config.port, this.config.host, function() {
+			clearInterval(query);
+			query = setInterval(function() {
+			    if(!tabu){
+				parentThis.send(cmdqversion);
+			    }
+			}, polling_time);
+			if(cb){cb();}
+	
+		});
+	
 		//this.log.info('VideoMatrix in net.connect().2');
 
 		matrix.on('data', function(chunk) {
@@ -96,7 +78,11 @@ class Videomatrix extends utils.Adapter {
 			parentThis.log.info("VideoMatrix incomming: " + in_msg);
 			//----// Version: V2.6.152
 			if(in_msg.toLowerCase().indexOf('version')>-1){
-				connection = true;
+				if(connection == false){
+					connection = true;
+					parentThis.log.info('Matrix CONNECTED');
+					parentThis.setState('info.connection', true, true);
+				}
 			}
 
 			if(in_msg.length > 15){
@@ -105,10 +91,6 @@ class Videomatrix extends utils.Adapter {
 			}
 		});
 
-		if(connection==true){
-			this.log.info('Matrix CONNECTED');
-			this.setState('info.connection', true, true);
-		}
 
 
 		matrix.on('error', function(e) {
