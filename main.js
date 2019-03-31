@@ -94,7 +94,8 @@ class Videomatrix extends utils.Adapter {
 			in_msg += chunk;
 			parentThis.log.info("VideoMatrix incomming: " + in_msg);
 			
-			if(!connection){
+			if(connection == false){
+				parentThis.log.info('connection==false...testes');
 				if(in_msg.length > 15){
 					//parentThis.setState('info.connection', true, true);
 
@@ -110,7 +111,7 @@ class Videomatrix extends utils.Adapter {
 
 		});
 
-		if(this.connection==true){
+		if(connection==true){
 			this.log.info('Matrix CONNECTED');
 			this.setState('info.connection', true, true);
 		}
