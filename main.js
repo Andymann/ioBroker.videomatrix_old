@@ -21,7 +21,6 @@ var query = null;
 var cmdqversion = '/^Version;';
 var in_msg = '';
 
-var testx;
 var parentThis;
 
 class Videomatrix extends utils.Adapter {
@@ -73,7 +72,7 @@ class Videomatrix extends utils.Adapter {
 			
 		matrix.on('data', function(chunk) {
 			in_msg += chunk;
-			parentThis.log.debug("VideoMatrix incomming: " + in_msg);
+			parentThis.log.info("VideoMatrix incomming: " + in_msg);
 			//----// Version: V2.6.152
 			if(in_msg.toLowerCase().indexOf('version')>-1){
 				if(connection == false){
