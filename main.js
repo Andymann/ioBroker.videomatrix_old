@@ -88,6 +88,11 @@ class Videomatrix extends utils.Adapter {
 				if(cb){cb();}
 		
 			});
+
+			if(connection){
+				parentThis.setState('info.connection', true, true);
+				parentThis.log.info('VideoMatrix connected');
+			}
 		}
 		//this.log.info('VideoMatrix in net.connect().2');
 
@@ -96,8 +101,6 @@ class Videomatrix extends utils.Adapter {
 			parentThis.log.info("VideoMatrix incomming: " + in_msg);
 			//----// Version: V2.6.152
 			if(in_msg.toLowerCase().indexOf('version')>-1){
-				parentThis.setState('info.connection', true, true);
-				parentThis.log.info('VideoMatrix connected');
 				connection = true;
 			}
 
