@@ -138,12 +138,17 @@ class Videomatrix extends utils.Adapter {
 		this.log.info(`matrixChanged:` + id +' ' + state);
 
 		//----videomatrix.0.output_1 12
-		if(id.toLowerCase().inlcudes('output')==true){
-            		this.log.info('matrixChanged: output changed');
-			var outputid = id.substring(id.lastIndexOf('_'));
-			this.log.info(`matrixChanged: outputid:` + outputid +' cmd:' + state + 'V' + outputid + '.');
+		//if(id.toLowerCase().inlcudes('output')==true){
+            	//	this.log.info('matrixChanged: output changed');
+		//	var outputid = id.substring(id.lastIndexOf('_'));
+		//	this.log.info('matrixChanged: outputid:` + outputid +' cmd:' + state + 'V' + outputid + '.');
+		//}
+		//var n = id.includes(".output");
+		if(id.includes(".output")==true){
+			this.log.info('matrixChanged: output changed');
+			var outputid = id.toLowerCase().substring(id.lastIndexOf('_')+1, id.toLowerCase().lastIndexOf(' '));
+			this.log.info('matrixChanged: outputid:' + outputid +' cmd:' + state + 'V' + outputid + '.');
 		}
-
 	}
 
 
