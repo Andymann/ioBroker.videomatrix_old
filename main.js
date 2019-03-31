@@ -7,6 +7,10 @@
 // The adapter-core module gives you access to the core ioBroker functions
 // you need to create an adapter
 const utils = require('@iobroker/adapter-core');
+counst maxoutputs = 10;
+
+
+
 var adapter = utils.adapter('videomatrix');
 
 // Load your modules here, e.g.:
@@ -163,6 +167,7 @@ class Videomatrix extends utils.Adapter {
 			native: {},
 		});
 
+/*
 		await this.setObjectAsync('output_01', {
 			type: 'state',
 			common: {
@@ -174,7 +179,20 @@ class Videomatrix extends utils.Adapter {
 			},
 			native: {},
 		});
-
+*/
+		for (var i = 0; i < maxoutputs; i++) {
+			await this.setObjectAsync('output_' + i.toString(), {
+				type: 'state',
+				common: {
+					name: 'Ausgang ' + i.toString(),
+					type: 'number',
+					role: 'level',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+		}
 		// in this template all states changes inside the adapters namespace are subscribed
 		this.subscribeStates('*');
 
