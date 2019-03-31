@@ -160,6 +160,18 @@ class Videomatrix extends utils.Adapter {
 			native: {},
 		});
 
+		await this.setObjectAsync('output_01', {
+			type: 'state',
+			common: {
+				name: 'Ausgang 01',
+				type: 'number',
+				role: 'level',
+				read: true,
+				write: true,
+			},
+			native: {},
+		});
+
 		// in this template all states changes inside the adapters namespace are subscribed
 		this.subscribeStates('*');
 
@@ -227,6 +239,7 @@ class Videomatrix extends utils.Adapter {
 	onStateChange(id, state) {
 		if (state) {
 			// The state was changed
+			//state videomatrix.0.testVariable changed: 
 			this.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
 		} else {
 			// The state was deleted
