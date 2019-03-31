@@ -136,6 +136,14 @@ class Videomatrix extends utils.Adapter {
 	//----Ein State wurde veraendert
 	matrixchanged(id, state){
 		this.log.info(`matrixChanged:` + id +' ' + state);
+
+		//----videomatrix.0.output_1 12
+		if(id.toLowerCase().inlcudes('.output')>-1){
+			var outputid = id.substring(lastIndexOf('_'));
+			this.log.info(`matrixChanged: outputid:` + outputid +' cmd:' + state + 'V' + outputid + '.' + '\n\r');
+		}
+
+
 	}
 
 
@@ -256,6 +264,7 @@ class Videomatrix extends utils.Adapter {
 			//state videomatrix.0.testVariable changed: 
 			this.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
 			this.matrixchanged(id, state.val);
+
 		} else {
 			// The state was deleted
 			this.log.info(`state ${id} deleted`);
