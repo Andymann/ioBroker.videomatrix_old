@@ -238,8 +238,7 @@ class Videomatrix extends utils.Adapter {
 	onObjectChange(id, obj) {
 		if (obj) {
 			// The object was changed
-			this.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
-			matrixchanged(id, JSON.stringify(obj));
+			this.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);			
 		} else {
 			// The object was deleted
 			this.log.info(`object ${id} deleted`);
@@ -256,6 +255,7 @@ class Videomatrix extends utils.Adapter {
 			// The state was changed
 			//state videomatrix.0.testVariable changed: 
 			this.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
+			matrixchanged(id, JSON.stringify(obj));
 		} else {
 			// The state was deleted
 			this.log.info(`state ${id} deleted`);
