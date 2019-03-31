@@ -135,7 +135,7 @@ class Videomatrix extends utils.Adapter {
 
 	//----Ein State wurde veraendert
 	matrixchanged(id, state){
-		this.log.info('matrixChanged:' + id +' ' + state);
+		//this.log.info('matrixChanged:' + id +' ' + state);
 
 		//----videomatrix.0.output_1 12
 		//if(id.toLowerCase().inlcudes('output')==true){
