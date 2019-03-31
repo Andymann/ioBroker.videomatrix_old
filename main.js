@@ -93,7 +93,7 @@ class Videomatrix extends utils.Adapter {
 			if (e.code == "ENOTFOUND" || e.code == "ECONNREFUSED" || e.code == "ETIMEDOUT") {
 				matrix.destroy();
 			}
-			err(e);
+			parenThis.err(e);
 		});
 
 		matrix.on('close', function(e) {
