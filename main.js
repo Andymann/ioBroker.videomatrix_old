@@ -133,6 +133,11 @@ class Videomatrix extends utils.Adapter {
 		}
 	}
 
+	//----Ein State wurde veraendert
+	matrixchanged(id, state){
+		this.log.info(`matrixChanged:` + id +' ' + state);
+	}
+
 
 	/**
 	 * Is called when databases are connected and adapter received configuration.
@@ -167,20 +172,8 @@ class Videomatrix extends utils.Adapter {
 			native: {},
 		});
 
-/*
-		await this.setObjectAsync('output_01', {
-			type: 'state',
-			common: {
-				name: 'Ausgang 01',
-				type: 'number',
-				role: 'level',
-				read: true,
-				write: true,
-			},
-			native: {},
-		});
-*/
-		for (var i = 0; i < maxoutputs; i++) {
+		//----Anlegen der Ausgaenge
+		for (var i = 1; i < maxoutputs+1; i++) {
 			await this.setObjectAsync('output_' + i.toString(), {
 				type: 'state',
 				common: {
@@ -246,6 +239,7 @@ class Videomatrix extends utils.Adapter {
 		if (obj) {
 			// The object was changed
 			this.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
+			matrixchanged(id, JSON.stringify(obj));
 		} else {
 			// The object was deleted
 			this.log.info(`object ${id} deleted`);
