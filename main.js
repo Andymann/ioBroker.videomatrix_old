@@ -59,7 +59,7 @@ class Videomatrix extends utils.Adapter {
 		this.log.info('Reconnect after 15 sec...');
 		connection = false;
 		recnt = setTimeout(function() {
-			connectmatrix();
+			parentThis.connectmatrix();
 		}, 15000);
 	}
 
