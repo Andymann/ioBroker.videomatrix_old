@@ -63,7 +63,9 @@ class Videomatrix extends utils.Adapter {
 			clearInterval(query);
 			query = setInterval(function() {
 			    if(!tabu){
-				parentThis.send(cmdqversion);
+				if(connection==false){
+					parentThis.send(cmdqversion);
+				}
 			    }
 			}, polling_time);
 			if(cb){cb();}
