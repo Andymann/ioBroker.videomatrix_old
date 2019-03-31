@@ -45,12 +45,12 @@ class Videomatrix extends utils.Adapter {
 		parentThis = this;
 	}
 
-	
 
 	initmatrix(){
-		this.log.info('TEST: initmatrix().');
+		this.log.info('initMatrix().');
 		this.connectmatrix();		
 	}
+
 
 	connectmatrix(cb){
 		this.log.info('connectMatrix().');
@@ -70,9 +70,7 @@ class Videomatrix extends utils.Adapter {
 			if(cb){cb();}
 	
 		});
-	
-		//this.log.info('VideoMatrix in net.connect().2');
-
+			
 		matrix.on('data', function(chunk) {
 			in_msg += chunk;
 			parentThis.log.info("VideoMatrix incomming: " + in_msg);
@@ -86,12 +84,9 @@ class Videomatrix extends utils.Adapter {
 			}
 
 			if(in_msg.length > 15){
-				//parentThis.setState('info.connection', true, true);
 				in_msg = '';
 			}
 		});
-
-
 
 		matrix.on('error', function(e) {
 			if (e.code == "ENOTFOUND" || e.code == "ECONNREFUSED" || e.code == "ETIMEDOUT") {
@@ -110,22 +105,22 @@ class Videomatrix extends utils.Adapter {
 	}
 
 	reconnect(){
-	    clearInterval(query);
-	    clearTimeout(recnt);
-	    matrix.destroy();
-	    this.setState('info.connection', false, true);
-	    this.log.info('Reconnect after 15 sec...');
-	    connection = false;
-	    recnt = setTimeout(function() {
-		connect();
-	    }, 15000);
+		this.log.info('reconnectMatrix()');
+		clearInterval(query);
+		clearTimeout(recnt);
+		matrix.destroy();
+		this.setState('info.connection', false, true);
+		this.log.info('Reconnect after 15 sec...');
+		connection = false;
+		recnt = setTimeout(function() {
+			connectmatrix();
+		}, 15000);
 	}
 
 	send(cmd){
 		this.log.info('VideoMatrix send:' + cmd);
 		if (cmd !== undefined){
 			cmd = cmd + '\n\r';
-			//adapter.log.debug('Send Command: ' + cmd);
 			matrix.write(cmd);
 			tabu = false;
 		}
