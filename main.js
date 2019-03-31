@@ -78,7 +78,7 @@ class Videomatrix extends utils.Adapter {
 			//----// Version: V2.6.152
 			if(in_msg.toLowerCase().indexOf('version')>-1){
 				if(connection == false){
-					connection = true;
+					praentThis.connection = true;
 					parentThis.log.info('Matrix CONNECTED');
 					parentThis.setState('info.connection', true, true);
 				}
