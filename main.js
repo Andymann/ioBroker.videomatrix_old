@@ -68,7 +68,7 @@ class Videomatrix extends utils.Adapter {
 		matrix = new net.Socket();
 		//matrix.connect(this.config.port, this.config.host, testx(cb));
 
-		if(!connection){
+		if(connection == false ){
 			matrix.connect(this.config.port, this.config.host, function() {
 				//parentThis.setState('info.connection', true, true);
 				//parentThis.log.info('VideoMatrix connected');
@@ -89,7 +89,7 @@ class Videomatrix extends utils.Adapter {
 		
 			});
 
-			if(connection){
+			if(connection == true){
 				parentThis.setState('info.connection', true, true);
 				parentThis.log.info('VideoMatrix connected');
 			}
