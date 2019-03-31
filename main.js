@@ -68,47 +68,43 @@ class Videomatrix extends utils.Adapter {
 		matrix = new net.Socket();
 		//matrix.connect(this.config.port, this.config.host, testx(cb));
 
-
-		matrix.connect(this.config.port, this.config.host, function() {
-			//parentThis.setState('info.connection', true, true);
-			//parentThis.log.info('VideoMatrix connected');
-			//connection = true;
-			clearInterval(query);
-			query = setInterval(function() {
-			    if(!tabu){
-				//this.log.debug('Sending QUERY:' + cmdqversion + '.');
-				//send(cmdqversion);
-				
-				var cmd = cmdqversion + '\n\r';
-				matrix.write(cmd);
-				tabu = false;
-				
-			    }
-			}, polling_time);
-			if(cb){cb();}
-	
-		});
+		if(!connection){
+			matrix.connect(this.config.port, this.config.host, function() {
+				//parentThis.setState('info.connection', true, true);
+				//parentThis.log.info('VideoMatrix connected');
+				//connection = true;
+				clearInterval(query);
+				query = setInterval(function() {
+				    if(!tabu){
+					//this.log.debug('Sending QUERY:' + cmdqversion + '.');
+					//send(cmdqversion);
+					
+					var cmd = cmdqversion + '\n\r';
+					matrix.write(cmd);
+					tabu = false;
+					
+				    }
+				}, polling_time);
+				if(cb){cb();}
+		
+			});
+		}
 		//this.log.info('VideoMatrix in net.connect().2');
 
 		matrix.on('data', function(chunk) {
 			in_msg += chunk;
 			parentThis.log.info("VideoMatrix incomming: " + in_msg);
-			
-			if(connection == false){
-				parentThis.log.info('connection==false...testes');
-				if(in_msg.length > 15){
-					//parentThis.setState('info.connection', true, true);
-
-					//----// Version: V2.6.152
-					if(in_msg.toLowerCase().indexOf('version')>-1){
-						parentThis.setState('info.connection', true, true);
-						parentThis.log.info('VideoMatrix connected');
-						connection = true;
-					}
-					in_msg = '';
-				}
+			//----// Version: V2.6.152
+			if(in_msg.toLowerCase().indexOf('version')>-1){
+				parentThis.setState('info.connection', true, true);
+				parentThis.log.info('VideoMatrix connected');
+				connection = true;
 			}
 
+			if(in_msg.length > 15){
+				//parentThis.setState('info.connection', true, true);
+				in_msg = '';
+			}
 		});
 
 		if(connection==true){
