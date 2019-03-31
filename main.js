@@ -139,7 +139,7 @@ class Videomatrix extends utils.Adapter {
 
 		//----videomatrix.0.output_1 12
 		if(id.toLowerCase().inlcudes('.output')>-1){
-			var outputid = id.substring(lastIndexOf('_'));
+			var outputid = id.substring(id.lastIndexOf('_'));
 			this.log.info(`matrixChanged: outputid:` + outputid +' cmd:' + state + 'V' + outputid + '.' + '\n\r');
 		}
 
