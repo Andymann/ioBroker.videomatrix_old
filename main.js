@@ -98,7 +98,7 @@ class Videomatrix extends utils.Adapter {
 
 		matrix.on('close', function(e) {
 			if(connection){
-				err('VideoMatrix disconnected');
+				parentThis.err('VideoMatrix disconnected');
 			}
 			reconnect();
 		});
