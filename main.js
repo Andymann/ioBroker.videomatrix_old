@@ -77,12 +77,7 @@ class Videomatrix extends utils.Adapter {
 				query = setInterval(function() {
 				    if(!tabu){
 					//this.log.debug('Sending QUERY:' + cmdqversion + '.');
-					//send(cmdqversion);
-					
-					var cmd = cmdqversion + '\n\r';
-					matrix.write(cmd);
-					tabu = false;
-					
+					parentThis.send(cmdqversion);
 				    }
 				}, polling_time);
 				if(cb){cb();}
