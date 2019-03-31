@@ -147,7 +147,7 @@ class Videomatrix extends utils.Adapter {
 		if(id.toString().includes('.output')){
 			this.log.info('matrixChanged: output changed');
 			//var outputid = id.toLowerCase().substring(id.lastIndexOf('_')+1, id.toLowerCase().lastIndexOf(' '));
-			var outputid = id.toLowerCase().substring(id.lastIndexOf(' ')+1);
+			var outputid = id.toLowerCase().substring(id.lastIndexOf('_')+1);
 			this.log.info('matrixChanged: outputid:' + outputid +' cmd:' + state + 'V' + outputid + '.');
 		}else{
 			this.log.info('matrixChanged: kein Treffer');
