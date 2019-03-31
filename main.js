@@ -50,6 +50,20 @@ class Videomatrix extends utils.Adapter {
 		this.connectmatrix();		
 	}
 
+	reconnect(){
+		this.log.info('reconnectMatrix()');
+		clearInterval(query);
+		clearTimeout(recnt);
+		matrix.destroy();
+		this.setState('info.connection', false, true);
+		this.log.info('Reconnect after 15 sec...');
+		connection = false;
+		recnt = setTimeout(function() {
+			connectmatrix();
+		}, 15000);
+	}
+
+
 
 	connectmatrix(cb){
 		this.log.info('connectMatrix().');
@@ -105,19 +119,7 @@ class Videomatrix extends utils.Adapter {
 
 	}
 
-	reconnect(){
-		this.log.info('reconnectMatrix()');
-		clearInterval(query);
-		clearTimeout(recnt);
-		matrix.destroy();
-		this.setState('info.connection', false, true);
-		this.log.info('Reconnect after 15 sec...');
-		connection = false;
-		recnt = setTimeout(function() {
-			connectmatrix();
-		}, 15000);
-	}
-
+	
 	send(cmd){
 		this.log.info('VideoMatrix send:' + cmd);
 		if (cmd !== undefined){
