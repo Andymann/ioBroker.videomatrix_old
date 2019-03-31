@@ -100,7 +100,7 @@ class Videomatrix extends utils.Adapter {
 			if(connection){
 				parentThis.log.error('VideoMatrix disconnected');
 			}
-			reconnect();
+			parentThis.reconnect();
 		});
 
 	}
