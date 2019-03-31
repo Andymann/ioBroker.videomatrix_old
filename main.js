@@ -63,7 +63,7 @@ class Videomatrix extends utils.Adapter {
 			clearInterval(query);
 			query = setInterval(function() {
 			    if(!tabu){
-				if(parentThis.connection==false){
+				if(connection==false){
 					parentThis.send(cmdqversion);
 				}
 			    }
@@ -77,8 +77,8 @@ class Videomatrix extends utils.Adapter {
 			parentThis.log.info("VideoMatrix incomming: " + in_msg);
 			//----// Version: V2.6.152
 			if(in_msg.toLowerCase().indexOf('version')>-1){
-				if(parentThis.connection == false){
-					parentThis.connection = true;
+				if(connection == false){
+					connection = true;
 					parentThis.log.info('Matrix CONNECTED');
 					parentThis.setState('info.connection', true, true);
 				}
