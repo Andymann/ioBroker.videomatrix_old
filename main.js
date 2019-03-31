@@ -93,12 +93,12 @@ class Videomatrix extends utils.Adapter {
 			if (e.code == "ENOTFOUND" || e.code == "ECONNREFUSED" || e.code == "ETIMEDOUT") {
 				matrix.destroy();
 			}
-			parentThis.err(e);
+			parentThis.log.err(e);
 		});
 
 		matrix.on('close', function(e) {
 			if(connection){
-				parentThis.err('VideoMatrix disconnected');
+				parentThis.log.err('VideoMatrix disconnected');
 			}
 			reconnect();
 		});
