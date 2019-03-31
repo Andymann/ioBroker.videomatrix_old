@@ -7,7 +7,7 @@
 // The adapter-core module gives you access to the core ioBroker functions
 // you need to create an adapter
 const utils = require('@iobroker/adapter-core');
-counst maxoutputs = 10;
+const maxoutputs = 10;
 
 
 
