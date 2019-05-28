@@ -122,7 +122,7 @@ class Videomatrix extends utils.Adapter {
 
 	arrQuery = [];
 	for (var i = 0; i < MAXCHANNELS; i++) {
-		arrQuery.push('Status' + toString(i+1) + '.');
+		arrQuery.push("Status" + toString(i+1) + ".");
 	}
         
         bQueryDone = false;
