@@ -308,7 +308,7 @@ class Videomatrix extends utils.Adapter {
                 this.log.debug('VideoMatrix: processCMD: next CMD=' + tmp + ' arrCMD.length rest=' +arrCMD.length.toString());
                 lastCMD = tmp;
                 setTimeout(function() {
-                    matrix.write(tmp);           
+                    matrix.write(tmp + '\n\r');           
                 }, 100);
             }else{
                 this.log.debug('VideoMatrix: processCMD: bWaitingForResponse==FALSE, arrCMD ist leer. Kein Problem');
