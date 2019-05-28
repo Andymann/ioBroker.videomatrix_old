@@ -121,8 +121,8 @@ class Videomatrix extends utils.Adapter {
         var port = this.config.port;
 
 	arrQuery = [];
-	for (var i = 0; i < MAXCHANNELS; i++) {
-		this.log.info('VideoMatrix: connect(): push to arrQuery:' + 'Status' + toString((i+1)) + '.');
+	for (var i=0; i<MAXCHANNELS; i++) {
+		this.log.info('VideoMatrix: connect(): push to arrQuery:' + 'Status' + toString(i) + '.');
 		arrQuery.push("Status" + toString((i+1)) + ".");
 	}
         
