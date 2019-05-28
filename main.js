@@ -108,7 +108,7 @@ class Videomatrix extends utils.Adapter {
         bQueryInProgress  = true;
 	this.setState('queryState', true, true);
         arrQuery.forEach(function(item, index, array) {                             
-            parentThis.log.info('VideoMatrix: queryMatrix(). pushing:' + item);
+            //parentThis.log.info('VideoMatrix: queryMatrix(). pushing:' + item);
             arrCMD.push(item);
         });
         this.log.info('VideoMatrix: queryMatrix(). arrCMD.length hinterher=' + arrCMD.length.toString());
@@ -383,13 +383,16 @@ class Videomatrix extends utils.Adapter {
             this.log.debug('VideoMatrix: parseMsg() Response unhandled:' + msg );
         }
 */
-	
+	this.log.info('parseMsg():' + msg );
+
 	if(msg.toLowerCase().startsWith('model:')){
 	    this.log.info('parseMsg() Response = CONNECTION' );
             connection = true;
             this.setState('info.connection', true, true);
 	    this.setState('minorProblem', false, true);
-	}
+	} else {
+            this.log.debug('VideoMatrix: parseMsg() Response unhandled:' + msg );
+        }
 
 
         bWaitingForResponse = false;
