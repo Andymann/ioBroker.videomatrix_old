@@ -177,7 +177,7 @@ class Videomatrix extends utils.Adapter {
 			                //----deswegen wird erstmal der MaxTryCounter heruntergesetzt und -sofern nichts kommt- bis zum naechsten Timeout gewartet.
 			                //----Wenn iMaxTryCounter==0 ist, koennen wir von einem Problem ausgehen
 			                parentThis.log.info('VideoMatrix: connectMatrix(): kleines Timeout. bWaitingForResponse==TRUE iMaxTryCounter==' + iMaxTryCounter.toString() );
-			                parentThis.log.info('VideoMatrix: connectMatrix(): kleines Timeout. lastCMD =' + parentThis.toHexString(lastCMD) + ' nichts tun, noch warten');
+			                parentThis.log.info('VideoMatrix: connectMatrix(): kleines Timeout. lastCMD =' + lastCMD + ' nichts tun, noch warten');
 			                iMaxTryCounter--;   
 					parentThis.setState('minorProblem', true, true);
 			            }else{
@@ -229,7 +229,7 @@ class Videomatrix extends utils.Adapter {
         });
 
         matrix.on('data', function(chunk) {
-            in_msg += parentThis.toHexString(chunk);
+            in_msg += chunk;
             parentThis.log.debug('VideoMatrix: matrix.on data(); in_msg:' + in_msg );
 	/*
             if(bWaitingForResponse==true){                                                                          
