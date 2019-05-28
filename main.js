@@ -182,16 +182,16 @@ class Videomatrix extends utils.Adapter {
 					parentThis.setState('minorProblem', true, true);
 			            }else{
 			                if(iMaxTimeoutCounter<3){
-			                    parentThis.log.info('VideoMatrix: connectMatrix() in_msg: kleines Timeout. bWaitingForResponse==TRUE iMaxTryCounter==0. Erneutes Senden von ' + parentThis.toHexString(lastCMD));
+			                    parentThis.log.info('VideoMatrix: connectMatrix() in_msg: kleines Timeout. bWaitingForResponse==TRUE iMaxTryCounter==0. Erneutes Senden von ' + lastCMD);
 			                    iMaxTimeoutCounter++;
 			                    iMaxTryCounter=3;
 			                    if(lastCMD !== undefined){
 			                        setTimeout(function() {
-			                            matrix.write(lastCMD);            
+			                            matrix.write(lastCMD + '\n\r');            
 			                        }, 100);
 			                    }
 			                }else{
-			                    parentThis.log.error('VideoMatrix: connectMatrix() in_msg: kleines Timeout. bWaitingForResponse==TRUE iMaxTryCounter==0. Erneutes Senden von ' + parentThis.toHexString(lastCMD) + 'schlug mehrfach fehl');
+			                    parentThis.log.error('VideoMatrix: connectMatrix() in_msg: kleines Timeout. bWaitingForResponse==TRUE iMaxTryCounter==0. Erneutes Senden von ' + lastCMD + 'schlug mehrfach fehl');
 			                    iMaxTimeoutCounter=0;
 			                    parentThis.log.error('VideoMatrix: connectMatrix() in_msg: kleines Timeout. bWaitingForResponse==TRUE iMaxTryCounter==0');
 			                    //parentThis.log.error('WIE reagieren wir hier drauf? Was ist, wenn ein Befehl nicht umgesetzt werden konnte?');
