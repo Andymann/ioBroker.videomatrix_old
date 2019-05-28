@@ -231,35 +231,36 @@ class Videomatrix extends utils.Adapter {
         matrix.on('data', function(chunk) {
             in_msg += chunk;
             parentThis.log.debug('VideoMatrix: matrix.on data(); in_msg:' + in_msg );
-	    if(in_msg.includes('\n')){
-		parentThis.log.debug('VideoMatrix: matrix.on data() COMPLETE: in_msg:' + in_msg );
-		in_msg = '';
-	    }
-	/*
+//	    if(in_msg.includes('\n')){
+//		parentThis.log.debug('VideoMatrix: matrix.on data() COMPLETE: in_msg:' + in_msg );
+//		in_msg = '';
+//	    }
+	
             if(bWaitingForResponse==true){                                                                          
-                if((in_msg.length >= 26) && (in_msg.includes('f0'))){
+                if(in_msg.includes('\n')){
                     //parentThis.log.debug('VideoMatrix: matrix.on data(); in_msg ist lang genug und enthaelt f0:' + in_msg);
-                    var iStartPos = in_msg.indexOf('f0');
-                    if(in_msg.toLowerCase().substring(iStartPos+24,iStartPos+26)=='f7'){                                                                                              
+                    //var iStartPos = in_msg.indexOf('f0');
+                    //if(in_msg.toLowerCase().substring(iStartPos+24,iStartPos+26)=='f7'){                                                                                              
                         bWaitingForResponse = false;
-                        var tmpMSG = in_msg.toLowerCase().substring(iStartPos,iStartPos+26);
-                        parentThis.log.debug('VideoMatrix: matrix.on data(); filtered:' + tmpMSG);
-                        parentThis.bWaitingForResponse = false;
+			var tmpMSG = in_msg;
+                        //var tmpMSG = in_msg.toLowerCase().substring(iStartPos,iStartPos+26);
+                        //parentThis.log.debug('VideoMatrix: matrix.on data(); filtered:' + tmpMSG);
+                        //parentThis.bWaitingForResponse = false;
                         parentThis.parseMsg(tmpMSG);
                         in_msg = '';
                         lastCMD = '';
                         //iMaxTryCounter = 3;
                         iMaxTimeoutCounter = 0;
                         parentThis.processCMD();                        
-                    }else{
-                        //----Irgendwie vergniesgnaddelt
-                        parentThis.log.info('VideoMatrix: matrix.on data: Fehlerhafte oder inkomplette Daten empfangen:' + in_msg);                                                                                                   
-                    }                                                                                           
+                    //}else{
+                    //    //----Irgendwie vergniesgnaddelt
+                    //    parentThis.log.info('VideoMatrix: matrix.on data: Fehlerhafte oder inkomplette Daten empfangen:' + in_msg);                                                                                                   
+                    //}                                                                                           
                 }
             }else{
                 parentThis.log.info('VideoMatrix: matrix.on data(): incomming aber bWaitingForResponse==FALSE; in_msg:' + in_msg);
             }
-	*/
+
             if(in_msg.length > 23){
                 //----Just in case
                 in_msg = '';
@@ -360,6 +361,8 @@ class Videomatrix extends utils.Adapter {
 
     //----Verarbeitung ankommender Daten. alles ist asynchron.
     parseMsg(msg){
+
+/*
         var arrResponse = this.toArray(msg);
 
         if (arrResponse[3] == 0x00 ){
@@ -378,6 +381,15 @@ class Videomatrix extends utils.Adapter {
         } else {
             this.log.debug('VideoMatrix: parseMsg() Response unhandled:' + msg );
         }
+*/
+	
+	if(msg.toLowerCase().startsWith('model:')){
+	    this.log.info('parseMsg() Response = CONNECTION' );
+            connection = true;
+            this.setState('info.connection', true, true);
+	    this.setState('minorProblem', false, true);
+	}
+
 
         bWaitingForResponse = false;
     }
