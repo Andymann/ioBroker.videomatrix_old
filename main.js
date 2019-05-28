@@ -108,7 +108,7 @@ class Videomatrix extends utils.Adapter {
         bQueryInProgress  = true;
 	this.setState('queryState', true, true);
         arrQuery.forEach(function(item, index, array) {                             
-            //parentThis.log.info('VideoMatrix: queryMatrix(). pushing:' + parentThis.toHexString(item));
+            parentThis.log.info('VideoMatrix: queryMatrix(). pushing:' + item);
             arrCMD.push(item);
         });
         this.log.info('VideoMatrix: queryMatrix(). arrCMD.length hinterher=' + arrCMD.length.toString());
