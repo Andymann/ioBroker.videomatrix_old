@@ -391,7 +391,7 @@ class Videomatrix extends utils.Adapter {
 	    //----Ein Ergebnis der Query
 	    var iStart = msg.indexOf(':')+1;
 	    var tmpIN = msg.substring(iStart, msg.indexOf(' '));
-	    var tmpOUT = msg.substring(msg.lastIndexOf(' '));				       
+	    var tmpOUT = msg.substring(msg.lastIndexOf(' ')+1).trim();	
 	    this.log.info('parseMsg(): Routing Answer: IN:' + tmpIN + '; OUT:' + tmpOUT + ';');
 
 	} else {
