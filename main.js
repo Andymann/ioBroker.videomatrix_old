@@ -215,7 +215,7 @@ class Videomatrix extends utils.Adapter {
                                 }
                             }
                         }else{
-                            //parentThis.log.debug('VideoMatrix: connectMatrix() in_msg: kleines Timeout. bWaitingForResponse==FALSE, kein Problem');
+                            parentThis.log.debug('VideoMatrix: connectMatrix() in_msg: kleines Timeout. bWaitingForResponse==FALSE, kein Problem');
                         }
                     }, 333/*kleinesIntervall*/);
 
@@ -231,7 +231,7 @@ class Videomatrix extends utils.Adapter {
 
         matrix.on('data', function(chunk) {
             in_msg += chunk;
-            parentThis.log.debug('VideoMatrix: matrix.on data(); in_msg:' + in_msg );
+            //parentThis.log.debug('VideoMatrix: matrix.on data(); in_msg:' + in_msg );
 	    if(in_msg.includes('\n')){
 		parentThis.log.debug('VideoMatrix: matrix.on data() COMPLETE: in_msg:' + in_msg );
 //		in_msg = '';
