@@ -346,15 +346,12 @@ class Videomatrix extends utils.Adapter {
         }
     }
 
-    setRoutingState(outIndex, inIndex, onoff){
-        //this.log.info('setRoutingState() Out:' + outIndex.toString() + ' In:' + inIndex.toString() + ' Val:' + onoff.toString() );
-        //this.log.info('setRoutingState() outputroutestate_' + (inIndex*8 + outIndex).toString());
-        this.setStateAsync('outputroutestate_' + (inIndex*8 + outIndex+1).toString(), { val: onoff, ack: true });
-        arrStateQuery_Routing[inIndex*8 + outIndex] = true;
+    //----Uebergabe: Nummer statt Index
+    setRoutingState(pIN, pOUT){
+	this.setStateAsync('outputroutestate_' + (pIN).toString(), { val: pOUT, ack: true });
+        arrStateQuery_Routing[pIN-1] = true;
         this.checkQueryDone();
     }
-
-    
 
     //----Verarbeitung ankommender Daten. alles ist asynchron.
     parseMsg(msg){
@@ -393,6 +390,7 @@ class Videomatrix extends utils.Adapter {
 	    var tmpIN = msg.substring(iStart, msg.indexOf(' '));
 	    var tmpOUT = msg.substring(msg.lastIndexOf(' ')+1).trim();	
 	    this.log.info('parseMsg(): Routing Answer: IN:' + tmpIN + '; OUT:' + tmpOUT + ';');
+	    this.setRoutingState(parseInt(tmpIN), parseInt(tmpOUT));
 
 	} else {
             this.log.debug('VideoMatrix: parseMsg() Response unhandled:' + msg );
@@ -483,14 +481,13 @@ class Videomatrix extends utils.Adapter {
 
         
         //----Routing via Buttons; 0-indiziert, aber Anzeige beginnt bei '1'
-        for (var i = 0; i < MAXCHANNELS; i++) {
-            
+        for (var i = 0; i < MAXCHANNELS; i++) {            
 		await this.setObjectAsync('outputroutestate_' + (i+1).toString(), {
 		    type: 'state',
 		    common: {
 		        name: 'outputrouting',
-		        type: 'boolean',
-		        role: 'indicator',
+		        type: 'number',
+		        role: 'level',
 		        read: true,
 		        write: true,
 		    },
