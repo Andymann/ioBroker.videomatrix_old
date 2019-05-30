@@ -386,6 +386,14 @@ class Videomatrix extends utils.Adapter {
             connection = true;
             this.setState('info.connection', true, true);
 	    this.setState('minorProblem', false, true);
+
+	}else if(msg.toLowerCase().startsWith('/v:')){
+	    //----Ein Ergebnis der Query
+	    var iStart = msg.indexOf(':')+1;
+	    var tmpIN = msg.substring(iStart, msg.indexOf(' '));
+	    var tmpOUT = msg.substring(lastIndexOf(' '));
+	    this.log.info('parseMsg(): Routing Answer: IN:' + tmpIN + '; OUT:' + tmpOUT + ';');
+
 	} else {
             this.log.debug('VideoMatrix: parseMsg() Response unhandled:' + msg );
         }
