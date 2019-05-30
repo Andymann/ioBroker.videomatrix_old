@@ -356,26 +356,6 @@ class Videomatrix extends utils.Adapter {
     //----Verarbeitung ankommender Daten. alles ist asynchron.
     parseMsg(msg){
 
-/*
-        var arrResponse = this.toArray(msg);
-
-        if (arrResponse[3] == 0x00 ){
-            this.log.info('parseMsg() Response = CONNECTION' );
-            connection = true;
-            this.setState('info.connection', true, true);
-	    this.setState('minorProblem', false, true);
-            //this.queryMatrix();
-        }else if (arrResponse[3] == 0x10 ){
-            //this.log.info('parseMsg() Response = ReadMemory' );
-            //----Routing
-            if((arrResponse[4] == out0_in0_Hi) && (arrResponse[5] == out0_in0_Lo)){ this.setRoutingState(0, 0, (arrResponse[8]==0x1E)); }
-            if((arrResponse[4] == out0_in1_Hi) && (arrResponse[5] == out0_in1_Lo)){ this.setRoutingState(0, 1, (arrResponse[8]==0x1E)); }
-            if((arrResponse[4] == out0_in2_Hi) && (arrResponse[5] == out0_in2_Lo)){ this.setRoutingState(0, 2, (arrResponse[8]==0x1E)); }
-            
-        } else {
-            this.log.debug('VideoMatrix: parseMsg() Response unhandled:' + msg );
-        }
-*/
 	this.log.info('parseMsg():' + msg );
 
 	if(msg.toLowerCase().startsWith('model:')){
@@ -413,25 +393,17 @@ class Videomatrix extends utils.Adapter {
             if(id.toString().includes('.outputroutestate_')){
                 //this.log.info('matrixChanged: outputroutestate changed. ID:' + id.toString());
                 //this.log.info('matrixChanged: outputroute changed via Button. ID:' + id.toString() + ' val:' + val.toString());
-                var channelID = parseInt(id.toLowerCase().substring(id.lastIndexOf('_')+1))-1;
+                var iEingang = (id.toLowerCase().substring(id.lastIndexOf('_')+1));
                 //this.log.info('matrixChanged: outputroutestate changed. channelID:' + channelID.toString() + ' val:' + val.toString() );
 
-                var iAusgang = channelID % 8;
-                var iEingang = (channelID-iAusgang)/8;
+		var iAusgang = val;
 
-                cmdRoute[4] = iAusgang + 8;
-                cmdRoute[10] = iEingang;
-                if(val==true){
-                    this.log.info('VideoMatrix: matrixChanged: Eingang ' + iEingang.toString() + ' Ausgang ' + iAusgang.toString() + ' AN' );
-                    cmdRoute[11] = 30;
-                }else{
-                    this.log.info('VideoMatrix: matrixChanged: Eingang ' + iEingang.toString() + ' Ausgang ' + iAusgang.toString() + ' AUS');
-                    cmdRoute[11] = 128;
-                }
+
+                this.log.info('VideoMatrix: matrixChanged: Eingang ' + iEingang + ' Ausgang ' + iAusgang );
 
                 //this.send(cmdRoute, 5);
-                arrCMD.push(cmdRoute);
-                this.processCMD();
+                //arrCMD.push(cmdRoute);
+                //this.processCMD();
 
             }
 
