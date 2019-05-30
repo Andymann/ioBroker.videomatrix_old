@@ -26,12 +26,6 @@ var bQueryComplete_Routing;
 
 var cmdPing = '/*Type;';
 
-//var cmdDisconnect = new Buffer([0xf0, firmware, idDevice, 0xf0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf7]);
-//var cmdGain =       new Buffer([0xf0, firmware, idDevice, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf7]);
-//var cmdRoute =      new Buffer([0xf0, firmware, idDevice, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf7]);
-//var cmdPreset =     new Buffer([0xf0, firmware, idDevice, 0x1B, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf7]);
-//var cmdReadmemory=  new Buffer([0xf0, firmware, idDevice, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf7]);
-
 var bWaitingForResponse = false;
 var bQueryDone;
 var bQueryInProgress;
@@ -164,7 +158,9 @@ class Videomatrix extends utils.Adapter {
                             if(!bQueryInProgress){
                                 parentThis.log.debug('VideoMatrix: connectMatrix().connection==true, bQueryDone==FALSE, idle, query Matrix');                            
                                 parentThis.queryMatrix();
-                            }
+                            }else{
+				parentThis.log.debug('VideoMatrix: connectMatrix().connection==true, bQueryDone==FALSE, bQueryDone==TRUE, idle');                            
+			    }
                         }                                                                                           
                     }
 
