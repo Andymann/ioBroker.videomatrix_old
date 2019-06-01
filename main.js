@@ -406,12 +406,19 @@ class Videomatrix extends utils.Adapter {
         if(ack==false){            
 
             if(id.toString().includes('.outputroutestate_')){
-                //this.log.info('matrixChanged: outputroutestate changed. ID:' + id.toString());
-                //this.log.info('matrixChanged: outputroute changed via Button. ID:' + id.toString() + ' val:' + val.toString());
                 var sAusgang = (id.toLowerCase().substring(id.lastIndexOf('_')+1));
-                //this.log.info('matrixChanged: outputroutestate changed. channelID:' + channelID.toString() + ' val:' + val.toString() );
+               	var sEingang = val.toString();
 
-		var sEingang = val.toString();
+
+                this.log.info('VideoMatrix: matrixChanged: Eingang ' + sEingang + ' Ausgang ' + sAusgang );
+		var cmdRoute = sEingang + 'V' + sAusgang + '.';
+                //this.send(cmdRoute, 5);
+                arrCMD.push(cmdRoute);
+                this.processCMD();
+
+	    if(id.toString().includes('.inputroutestate_')){
+                var sEingang = (id.toLowerCase().substring(id.lastIndexOf('_')+1));
+               	var sAusgang = val.toString();
 
 
                 this.log.info('VideoMatrix: matrixChanged: Eingang ' + sEingang + ' Ausgang ' + sAusgang );
@@ -477,6 +484,21 @@ class Videomatrix extends utils.Adapter {
 		    type: 'state',
 		    common: {
 		        name: 'outputrouting',
+		        type: 'number',
+		        role: 'level',
+		        read: true,
+		        write: true,
+		    },
+		    native: {},
+		});
+	    
+        }
+
+	for (var i = 0; i < MAXCHANNELS; i++) {            
+		await this.setObjectAsync('inputroutestate_' + (i+1).toString(), {
+		    type: 'state',
+		    common: {
+		        name: 'Input to Output',
 		        type: 'number',
 		        role: 'level',
 		        read: true,
