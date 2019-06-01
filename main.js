@@ -487,6 +487,7 @@ class Videomatrix extends utils.Adapter {
 	    
         }
 
+/*
 	for (var i = 0; i < MAXCHANNELS; i++) {            
 	    for (var j = 0; j < MAXCHANNELS; j++) {           
 		await this.setObjectAsync('input_' + (i+1).toString().padStart(2, '0') + '_out_' + (j+1).toString().padStart(2, '0'), {
@@ -502,7 +503,7 @@ class Videomatrix extends utils.Adapter {
 		});
 	    }
         }
-
+*/
 
         //----Laenge von arrCMD; der Command-Queue
         await this.setObjectAsync('queuelength', {
