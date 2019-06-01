@@ -549,6 +549,7 @@ class Videomatrix extends utils.Adapter {
 		    common: {
 		        name: 'Connect Input to Output',
 		        type: 'boolean',
+			def: 'false',
 		        role: 'indicator',
 		        read: true,
 		        write: true,
