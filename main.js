@@ -354,6 +354,7 @@ class Videomatrix extends utils.Adapter {
     //----Uebergabe: Nummer statt Index
     setRoutingState(pIN, pOUT){
 	this.setStateAsync('outputroutestate_' + (pOUT).toString(), { val: pIN, ack: true });
+	this.setStateAsync('inputroutestate_' + (pIN).toString(), { val: pOUT, ack: true });
         arrStateQuery_Routing[stateCheckCounter] = true;
         this.checkQueryDone();
     }
