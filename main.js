@@ -437,19 +437,25 @@ class Videomatrix extends utils.Adapter {
 		var sEingang = id.substring(id.indexOf('input_')+6, id.indexOf('_out'));
 		var sAusgang = id.substring(id.indexOf('_out_')+5);
 		this.log.info('Neues Routing: IN:' + sEingang + ', OUT:' + sAusgang + '.Wert:' + val.toString() + '.Ende');
+		
+		this.log.info('Neues Routing: IN: Ein Ausgang kann nur einen definierten Eingang besitzen');
+		for (var i = 0; i < MAXCHANNELS; j++) {
+		    if(i != parseInt(sEingang) ){			
+			this.log.info('Neues Routing: IN: Ein Ausgang kann nur einen definierten Eingang besitzen. Setzte Eingang ' + i.toString() + ' fuer Ausgang ' + sAusgang + ' auf FALSE');
+			this.setStateAsync('input_' + (i).toString().padStart(2, '0') + '_out_' + (sAusgang).toString().padStart(2, '0'), { val: false, ack: true });
+		    }
+		}
+
 		var cmdRoute;		
 		if(val==true){
 		    cmdRoute = sEingang + 'V' + sAusgang + '.';	
-		    this.setStateAsync('input_' + (pIN).toString().padStart(2, '0') + '_out_' + (pOUT).toString().padStart(2, '0'), { val: true, ack: true });
+		    //this.setStateAsync('input_' + (pIN).toString().padStart(2, '0') + '_out_' + (pOUT).toString().padStart(2, '0'), { val: true, ack: true });
 		}else{
 		    //----Ausschalten
 		    cmdRoute = sAusgang + '$.';
-		    this.setStateAsync('input_' + (pIN).toString().padStart(2, '0') + '_out_' + (pOUT).toString().padStart(2, '0'), { val: false, ack: true });
+		    //this.setStateAsync('input_' + (pIN).toString().padStart(2, '0') + '_out_' + (pOUT).toString().padStart(2, '0'), { val: false, ack: true });
 		}
 		
-
-		//----Ein Ausgang kann nur EINEN Eingang haben
-		//this.setStateAsync('input_' + (pIN).toString().padStart(2, '0') + '_out_' + (pOUT).toString().padStart(2, '0'), { val: true, ack: true });
 
 		
                 arrCMD.push(cmdRoute);
