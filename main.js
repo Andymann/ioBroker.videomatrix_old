@@ -393,17 +393,17 @@ class Videomatrix extends utils.Adapter {
             if(id.toString().includes('.outputroutestate_')){
                 //this.log.info('matrixChanged: outputroutestate changed. ID:' + id.toString());
                 //this.log.info('matrixChanged: outputroute changed via Button. ID:' + id.toString() + ' val:' + val.toString());
-                var iEingang = (id.toLowerCase().substring(id.lastIndexOf('_')+1));
+                var sEingang = (id.toLowerCase().substring(id.lastIndexOf('_')+1));
                 //this.log.info('matrixChanged: outputroutestate changed. channelID:' + channelID.toString() + ' val:' + val.toString() );
 
-		var iAusgang = val;
+		var sAusgang = val.toString();
 
 
                 this.log.info('VideoMatrix: matrixChanged: Eingang ' + iEingang + ' Ausgang ' + iAusgang );
-
+		var cmdRoute = sEingang + 'V' + sAusgang + '.';
                 //this.send(cmdRoute, 5);
-                //arrCMD.push(cmdRoute);
-                //this.processCMD();
+                arrCMD.push(cmdRoute);
+                this.processCMD();
 
             }
 
