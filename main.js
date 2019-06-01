@@ -328,11 +328,14 @@ class Videomatrix extends utils.Adapter {
         //----Routing
         if(bQueryComplete_Routing==false){
             var bTMP_Routing = true;
-            arrStateQuery_Routing.forEach(function(item, index, array) {                
+	    var sRouting = 'Routing:';
+            arrStateQuery_Routing.forEach(function(item, index, array) {                		 
                 bTMP_Routing = bTMP_Routing && item;
+		sRouting += item.toString() + ' ';
             });
             bQueryComplete_Routing = bTMP_Routing;
             this.log.info('checkQueryDone(): Routing:' + bQueryComplete_Routing);
+	    this.log.info('checkQueryDone(): Routing:' + sRouting);
         }else{
             this.log.info('checkQueryDone(): Abfrage auf Routing bereits komplett.');
         }
@@ -372,7 +375,7 @@ class Videomatrix extends utils.Adapter {
 	    this.log.info('parseMsg(): Routing Query Answer: IN:' + tmpIN + '; OUT:' + tmpOUT + ';');
 	    this.setRoutingState(parseInt(tmpIN), parseInt(tmpOUT));
 
-	}else if(msg.toLowerCase().startsWith('YY/')){
+	}else if(msg.toLowerCase().startsWith('/')){
 	    //----Repsonse auf gesetztes Routing, Obacht bei der Reihenfolge.
 	    //----Response z.B. /1V3.
 	    var iTrenner = msg.toLowerCase().indexOf('v');
