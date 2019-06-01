@@ -500,7 +500,7 @@ class Videomatrix extends utils.Adapter {
 		    },
 		    native: {},
 		});
-	    
+	    }
         }
 
 
