@@ -416,7 +416,7 @@ class Videomatrix extends utils.Adapter {
                 arrCMD.push(cmdRoute);
                 this.processCMD();
 
-	    if(id.toString().includes('.inputroutestate_')){
+	    }else if(id.toString().includes('.inputroutestate_')){
                 var sEingang = (id.toLowerCase().substring(id.lastIndexOf('_')+1));
                	var sAusgang = val.toString();
 
