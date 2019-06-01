@@ -442,7 +442,7 @@ class Videomatrix extends utils.Adapter {
 		for (var i = 0; i < MAXCHANNELS; i++) {
 		    if(i+1 != parseInt(sEingang) ){			
 			this.log.info('Neues Routing: IN: Ein Ausgang kann nur einen definierten Eingang besitzen. Setzte Eingang ' + (i+1).toString() + ' fuer Ausgang ' + sAusgang + ' auf FALSE');
-			this.setStateAsync('input_' + (i).toString().padStart(2, '0') + '_out_' + (sAusgang).toString().padStart(2, '0'), { val: false, ack: true });
+			this.setStateAsync('input_' + (i+1).toString().padStart(2, '0') + '_out_' + (sAusgang).toString().padStart(2, '0'), { val: false, ack: true });
 		    }
 		}
 
