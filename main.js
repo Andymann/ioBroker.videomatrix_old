@@ -21,6 +21,7 @@ var lastCMD;
 var parentThis;
 var arrCMD = [];
 var arrStateQuery_Routing = [];
+var stateCheckCounter;	//----Per Query gibt es nur die Chance, Ausgaenge abzufragen. Deswegen muessen wir mit einem Counter arbeiten.
 
 var bQueryComplete_Routing;
 
@@ -129,7 +130,7 @@ class Videomatrix extends utils.Adapter {
 	for (var i = 0; i < MAXCHANNELS; i++) {
             arrStateQuery_Routing.push(false);	    
         }
-
+	stateCheckCounter=0;
         
         this.log.info('VideoMatrix: connecting to: ' + this.config.host + ':' + this.config.port);
 
@@ -159,7 +160,8 @@ class Videomatrix extends utils.Adapter {
                                 parentThis.log.debug('VideoMatrix: connectMatrix().connection==true, bQueryDone==FALSE, idle, query Matrix');                            
                                 parentThis.queryMatrix();
                             }else{
-				parentThis.log.debug('VideoMatrix: connectMatrix().connection==true, bQueryDone==FALSE, bQueryDone==TRUE, idle');                            
+				parentThis.log.debug('VideoMatrix: connectMatrix().connection==true, bQueryDone==FALSE, bQueryInProgress==TRUE, idle');      
+				parentThis.queryMatrix();                      
 			    }
                         }                                                                                           
                     }
@@ -352,7 +354,7 @@ class Videomatrix extends utils.Adapter {
     //----Uebergabe: Nummer statt Index
     setRoutingState(pIN, pOUT){
 	this.setStateAsync('outputroutestate_' + (pIN).toString(), { val: pOUT, ack: true });
-        arrStateQuery_Routing[pIN-1] = true;
+        arrStateQuery_Routing[stateCheckCounter] = true;
         this.checkQueryDone();
     }
 
@@ -374,6 +376,7 @@ class Videomatrix extends utils.Adapter {
 	    var tmpOUT = msg.substring(msg.lastIndexOf(' ')+1).trim();	
 	    this.log.info('parseMsg(): Routing Query Answer: IN:' + tmpIN + '; OUT:' + tmpOUT + ';');
 	    this.setRoutingState(parseInt(tmpIN), parseInt(tmpOUT));
+	    stateCheckCounter++;    //----Das ist nicht genau, aber anders geht es nicht
 
 	}else if(msg.toLowerCase().startsWith('/')){
 	    //----Repsonse auf gesetztes Routing, Obacht bei der Reihenfolge.
