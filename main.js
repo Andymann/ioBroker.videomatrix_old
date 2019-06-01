@@ -351,14 +351,15 @@ class Videomatrix extends utils.Adapter {
         }
     }
 
+/*
     //----Uebergabe: Nummer statt Index
     setRoutingState(pIN, pOUT){
-	this.setStateAsync('outputroutestate_' + (pOUT).toString(), { val: pIN, ack: true });
-	this.setStateAsync('inputroutestate_' + (pIN).toString(), { val: pOUT, ack: true });
+	//this.setStateAsync('outputroutestate_' + (pOUT).toString(), { val: pIN, ack: true });
+	this.setStateAsync('input_' + (pIN).toString().padStart(2, '0') + '_out_' + (pOUT).toString().padStart(2, '0'), { val: true, ack: true });
         arrStateQuery_Routing[stateCheckCounter] = true;
         this.checkQueryDone();
     }
-
+*/
     //----Verarbeitung ankommender Daten. alles ist asynchron.
     parseMsg(msg){
 
@@ -376,7 +377,11 @@ class Videomatrix extends utils.Adapter {
 	    var tmpIN = msg.substring(iStart, msg.indexOf(' '));
 	    var tmpOUT = msg.substring(msg.lastIndexOf(' ')+1).trim();	
 	    this.log.info('parseMsg(): Routing Query Answer: IN:' + tmpIN + '; OUT:' + tmpOUT + ';');
-	    this.setRoutingState(parseInt(tmpIN), parseInt(tmpOUT));
+	    //this.setRoutingState(parseInt(tmpIN), parseInt(tmpOUT));
+
+	    this.setStateAsync('input_' + (tmpIN).toString().padStart(2, '0') + '_out_' + (tmpOUT).toString().padStart(2, '0'), { val: true, ack: true });
+            arrStateQuery_Routing[stateCheckCounter] = true;
+            this.checkQueryDone();
 	    stateCheckCounter++;    //----Das ist nicht genau, aber anders geht es nicht
 
 	}else if(msg.toLowerCase().startsWith('/')){
@@ -431,8 +436,9 @@ class Videomatrix extends utils.Adapter {
             }else if(id.toString().includes('.input_')){
 		var sEingang = id.substring(id.indexOf('input_')+6, id.indexOf('_out'));
 		var sAusgang = id.substring(id.indexOf('_out_')+5);
-		this.log.info('Neues Routing: IN:' + sEingang + ', OUT:' + sAusgang + '.Ende');
+		this.log.info('Neues Routing: IN:' + sEingang + ', OUT:' + sAusgang + '.Wert:' + val.toString() + '.Ende');
 
+		//this.setStateAsync('input_' + (pIN).toString().padStart(2, '0') + '_out_' + (pOUT).toString().padStart(2, '0'), { val: true, ack: true });
 
 		var cmdRoute = sEingang + 'V' + sAusgang + '.';
                 arrCMD.push(cmdRoute);
