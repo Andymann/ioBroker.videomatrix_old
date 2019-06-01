@@ -578,7 +578,7 @@ class Videomatrix extends utils.Adapter {
 			// The state was changed
 			//state videomatrix.0.testVariable changed: 
 			this.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
-			this.matrixchanged(id, state.val);
+			this.matrixchanged(id, state.val, state.ack);
 
 		} else {
 			// The state was deleted
