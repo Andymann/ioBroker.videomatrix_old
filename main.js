@@ -399,7 +399,7 @@ class Videomatrix extends utils.Adapter {
 		var sAusgang = val.toString();
 
 
-                this.log.info('VideoMatrix: matrixChanged: Eingang ' + iEingang + ' Ausgang ' + iAusgang );
+                this.log.info('VideoMatrix: matrixChanged: Eingang ' + sEingang + ' Ausgang ' + sAusgang );
 		var cmdRoute = sEingang + 'V' + sAusgang + '.';
                 //this.send(cmdRoute, 5);
                 arrCMD.push(cmdRoute);
