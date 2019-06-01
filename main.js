@@ -420,7 +420,11 @@ class Videomatrix extends utils.Adapter {
                 arrCMD.push(cmdRoute);
                 this.processCMD();
 
-            }
+            }else if(id.toString().includes('.input_')){
+		var sEingang = id.substring(6, id.indexOf('_out'));
+		var sAusgang = id.substring(id.indexOf('_out_')+5);
+		this.log.info('Neues Routing: IN:' + sEingang + ', OUT:' + sAusgang + '.Ende');
+	    }
 
         }//----ack==FALSE                         
 
@@ -475,6 +479,22 @@ class Videomatrix extends utils.Adapter {
 		        name: 'outputrouting',
 		        type: 'number',
 		        role: 'level',
+		        read: true,
+		        write: true,
+		    },
+		    native: {},
+		});
+	    
+        }
+
+	for (var i = 0; i < MAXCHANNELS; i++) {            
+	    for (var j = 0; j < MAXCHANNELS; j++) {           
+		await this.setObjectAsync('input_' + (i+1).toString() + '_out_' + (j+1).toString(), {
+		    type: 'state',
+		    common: {
+		        name: 'Connect Input to Output',
+		        type: 'boolean',
+		        role: 'indicator',
 		        read: true,
 		        write: true,
 		    },
