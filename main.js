@@ -372,7 +372,7 @@ class Videomatrix extends utils.Adapter {
 	    this.log.info('parseMsg(): Routing Query Answer: IN:' + tmpIN + '; OUT:' + tmpOUT + ';');
 	    this.setRoutingState(parseInt(tmpIN), parseInt(tmpOUT));
 
-	}else if(msg.toLowerCase().startsWith('/')){
+	}else if(msg.toLowerCase().startsWith('YY/')){
 	    //----Repsonse auf gesetztes Routing, Obacht bei der Reihenfolge.
 	    //----Response z.B. /1V3.
 	    var iTrenner = msg.toLowerCase().indexOf('v');
