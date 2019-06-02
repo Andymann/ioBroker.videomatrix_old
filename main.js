@@ -91,7 +91,7 @@ class Videomatrix extends utils.Adapter {
     }
 
     pingMatrix(){
-        this.log.debug('VideoMatrix: pingMatrix()' );
+        this.log.info('VideoMatrix: pingMatrix()' );
         arrCMD.push(cmdPing);
         iMaxTryCounter = 3;
         this.processCMD();
@@ -363,7 +363,7 @@ class Videomatrix extends utils.Adapter {
     //----Verarbeitung ankommender Daten. alles ist asynchron.
     parseMsg(msg){
 
-	this.log.info('parseMsg():' + msg );
+	this.log.debug('parseMsg():' + msg );
 
 	if(msg.toLowerCase().includes('odel:')){
 	    this.log.info('parseMsg() Response = CONNECTION' );
