@@ -91,7 +91,7 @@ class Videomatrix extends utils.Adapter {
     }
 
     pingMatrix(){
-        this.log.info('VideoMatrix: pingMatrix()' );
+        this.log.debug('VideoMatrix: pingMatrix()' );
         arrCMD.push(cmdPing);
         iMaxTryCounter = 3;
         this.processCMD();
@@ -99,14 +99,14 @@ class Videomatrix extends utils.Adapter {
 
     //----Fragt die Werte vom Geraet ab.
     queryMatrix(){                
-        this.log.info('VideoMatrix: queryMatrix(). arrCMD.length vorher=' + arrCMD.length.toString());                      
+        //this.log.debug('VideoMatrix: queryMatrix(). arrCMD.length vorher=' + arrCMD.length.toString());                      
         bQueryInProgress  = true;
 	this.setState('queryState', true, true);
         arrQuery.forEach(function(item, index, array) {                             
             //parentThis.log.info('VideoMatrix: queryMatrix(). pushing:' + item);
             arrCMD.push(item);
         });
-        this.log.info('VideoMatrix: queryMatrix(). arrCMD.length hinterher=' + arrCMD.length.toString());
+        //this.log.debug('VideoMatrix: queryMatrix(). arrCMD.length hinterher=' + arrCMD.length.toString());
         iMaxTryCounter = 3;
         this.processCMD();
     }
@@ -145,7 +145,7 @@ class Videomatrix extends utils.Adapter {
         	                iMaxTryCounter = 3;
         	                parentThis.processCMD();
 			}else{
-				parentThis.log.info('VideoMatrix: connectMatrix().connection==false, bWaitingForResponse==false; nichts machen');
+				parentThis.log.debug('VideoMatrix: connectMatrix().connection==false, bWaitingForResponse==false; nichts machen');
 			}
                     }else{
                         if(bQueryDone==true){
@@ -176,7 +176,7 @@ class Videomatrix extends utils.Adapter {
 			                //----deswegen wird erstmal der MaxTryCounter heruntergesetzt und -sofern nichts kommt- bis zum naechsten Timeout gewartet.
 			                //----Wenn iMaxTryCounter==0 ist, koennen wir von einem Problem ausgehen
 			                parentThis.log.info('VideoMatrix: connectMatrix(): kleines Timeout. bWaitingForResponse==TRUE iMaxTryCounter==' + iMaxTryCounter.toString() );
-			                parentThis.log.info('VideoMatrix: connectMatrix(): kleines Timeout. lastCMD =' + lastCMD + ' nichts tun, noch warten');
+			                parentThis.log.info('VideoMatrix: connectMatrix(): kleines Timeout. lastCMD =' + lastCMD + '. MinorProblem = TRUE');
 			                iMaxTryCounter--;   
 					parentThis.setState('minorProblem', true, true);
 			            }else{
@@ -236,7 +236,7 @@ class Videomatrix extends utils.Adapter {
 	    }
 	
             if(bWaitingForResponse==true){                                                                          
-                if(in_msg.includes('\n')){
+                if(in_msg.includes('\r')){
                     //parentThis.log.debug('VideoMatrix: matrix.on data(); in_msg ist lang genug und enthaelt f0:' + in_msg);
                     //var iStartPos = in_msg.indexOf('f0');
                     //if(in_msg.toLowerCase().substring(iStartPos+24,iStartPos+26)=='f7'){                                                                                              
@@ -257,7 +257,7 @@ class Videomatrix extends utils.Adapter {
                     //}                                                                                           
                 }
             }else{
-                parentThis.log.info('VideoMatrix: matrix.on data(): incomming aber bWaitingForResponse==FALSE; in_msg:' + in_msg);
+                parentThis.log.debug('VideoMatrix: matrix.on data(): incomming aber bWaitingForResponse==FALSE; in_msg:' + in_msg);
             }
 
             if(in_msg.length > 23){
@@ -306,7 +306,7 @@ class Videomatrix extends utils.Adapter {
     processCMD(){
         if(!bWaitingForResponse){
             if(arrCMD.length>0){
-                this.log.info('VideoMatrix: processCMD: bWaitingForResponse==FALSE, arrCMD.length=' +arrCMD.length.toString());
+                this.log.debug('VideoMatrix: processCMD: bWaitingForResponse==FALSE, arrCMD.length=' +arrCMD.length.toString());
                 bWaitingForResponse=true;
                 var tmp = arrCMD.shift();
                 this.log.debug('VideoMatrix: processCMD: next CMD=' + tmp + ' arrCMD.length rest=' +arrCMD.length.toString());
@@ -336,10 +336,10 @@ class Videomatrix extends utils.Adapter {
 		sRouting += item.toString() + ' ';
             });
             bQueryComplete_Routing = bTMP_Routing;
-            this.log.info('checkQueryDone(): Routing:' + bQueryComplete_Routing);
-	    this.log.info('checkQueryDone(): Routing:' + sRouting);
+            this.log.debug('checkQueryDone(): Routing:' + bQueryComplete_Routing);
+	    this.log.debug('checkQueryDone(): Routing:' + sRouting);
         }else{
-            this.log.info('checkQueryDone(): Abfrage auf Routing bereits komplett.');
+            this.log.debug('checkQueryDone(): Abfrage auf Routing bereits komplett.');
         }
         
         bQueryDone = bQueryComplete_Routing;
@@ -365,7 +365,7 @@ class Videomatrix extends utils.Adapter {
 
 	this.log.info('parseMsg():' + msg );
 
-	if(msg.toLowerCase().startsWith('model:')){
+	if(msg.toLowerCase().includes('odel:')){
 	    this.log.info('parseMsg() Response = CONNECTION' );
             connection = true;
             this.setState('info.connection', true, true);
@@ -376,9 +376,8 @@ class Videomatrix extends utils.Adapter {
 	    var iStart = msg.indexOf(':')+1;
 	    var tmpIN = msg.substring(iStart, msg.indexOf(' '));
 	    var tmpOUT = msg.substring(msg.lastIndexOf(' ')+1).trim();	
-	    this.log.info('parseMsg(): Routing Query Answer: IN:' + tmpIN + '; OUT:' + tmpOUT + ';');
-	    //this.setRoutingState(parseInt(tmpIN), parseInt(tmpOUT));
-
+	    //this.log.info('parseMsg(): Routing Query Answer: IN:' + tmpIN + '; OUT:' + tmpOUT + ';');
+	    
 	    this.setStateAsync('input_' + (tmpIN).toString().padStart(2, '0') + '_out_' + (tmpOUT).toString().padStart(2, '0'), { val: true, ack: true });
             arrStateQuery_Routing[stateCheckCounter] = true;
             this.checkQueryDone();
@@ -391,10 +390,10 @@ class Videomatrix extends utils.Adapter {
 	    var sEingang = msg.substring(1, iTrenner);
 
 	    var sAusgang = msg.substring(iTrenner+1, msg.indexOf('.'));
-	    this.log.info('parseMsg(): SET Routing Answer: IN:' + sEingang + '; OUT:' + sAusgang + ';');
+	    //this.log.info('parseMsg(): SET Routing Answer: IN:' + sEingang + '; OUT:' + sAusgang + ';');
 
 	} else {
-            this.log.debug('VideoMatrix: parseMsg() Response unhandled:' + msg );
+            this.log.info('VideoMatrix: parseMsg() Response unhandled:' + msg );
         }
 
 
@@ -416,7 +415,7 @@ class Videomatrix extends utils.Adapter {
                	var sEingang = val.toString();
 
 
-                this.log.info('VideoMatrix: matrixChanged: Eingang ' + sEingang + ' Ausgang ' + sAusgang );
+                this.log.debug('VideoMatrix: matrixChanged: Eingang ' + sEingang + ' Ausgang ' + sAusgang );
 		var cmdRoute = sEingang + 'V' + sAusgang + '.';
                 //this.send(cmdRoute, 5);
                 arrCMD.push(cmdRoute);
@@ -427,7 +426,7 @@ class Videomatrix extends utils.Adapter {
                	var sAusgang = val.toString();
 
 
-                this.log.info('VideoMatrix: matrixChanged: Eingang ' + sEingang + ' Ausgang ' + sAusgang );
+                this.log.debug('VideoMatrix: matrixChanged: Eingang ' + sEingang + ' Ausgang ' + sAusgang );
 		var cmdRoute = sEingang + 'V' + sAusgang + '.';
                 //this.send(cmdRoute, 5);
                 arrCMD.push(cmdRoute);
@@ -436,12 +435,12 @@ class Videomatrix extends utils.Adapter {
             }else if(id.toString().includes('.input_')){
 		var sEingang = id.substring(id.indexOf('input_')+6, id.indexOf('_out'));
 		var sAusgang = id.substring(id.indexOf('_out_')+5);
-		this.log.info('Neues Routing: IN:' + sEingang + ', OUT:' + sAusgang + '.Wert:' + val.toString() + '.Ende');
+		//this.log.info('Neues Routing: IN:' + sEingang + ', OUT:' + sAusgang + '.Wert:' + val.toString() + '.Ende');
 		
-		this.log.info('Neues Routing: IN: Ein Ausgang kann nur einen definierten Eingang besitzen');
+		//this.log.info('Neues Routing: IN: Ein Ausgang kann nur einen definierten Eingang besitzen');
 		for (var i = 0; i < MAXCHANNELS; i++) {
 		    if(i+1 != parseInt(sEingang) ){			
-			this.log.info('Neues Routing: IN: Ein Ausgang kann nur einen definierten Eingang besitzen. Setzte Eingang ' + (i+1).toString() + ' fuer Ausgang ' + sAusgang + ' auf FALSE');
+			this.log.debug('Neues Routing: IN: Ein Ausgang kann nur einen definierten Eingang besitzen. Setzte Eingang ' + (i+1).toString() + ' fuer Ausgang ' + sAusgang + ' auf FALSE');
 			this.setStateAsync('input_' + (i+1).toString().padStart(2, '0') + '_out_' + (sAusgang).toString().padStart(2, '0'), { val: false, ack: true });
 		    }
 		}
@@ -652,7 +651,7 @@ class Videomatrix extends utils.Adapter {
 	onObjectChange(id, obj) {
 		if (obj) {
 			// The object was changed
-			this.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);			
+			this.log.debug(`object ${id} changed: ${JSON.stringify(obj)}`);			
 		} else {
 			// The object was deleted
 			this.log.info(`object ${id} deleted`);
@@ -668,7 +667,7 @@ class Videomatrix extends utils.Adapter {
 		if (state) {
 			// The state was changed
 			//state videomatrix.0.testVariable changed: 
-			this.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
+			this.log.debug(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
 			this.matrixchanged(id, state.val, state.ack);
 
 		} else {
