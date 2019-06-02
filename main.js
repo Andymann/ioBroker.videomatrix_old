@@ -230,7 +230,7 @@ class Videomatrix extends utils.Adapter {
         matrix.on('data', function(chunk) {
             in_msg += chunk;
             //parentThis.log.debug('VideoMatrix: matrix.on data(); in_msg:' + in_msg );
-	    if(in_msg.includes('\n')){
+	    if(in_msg.includes('\r')){
 		parentThis.log.debug('VideoMatrix: matrix.on data() COMPLETE: in_msg:' + in_msg );
 //		in_msg = '';
 	    }
