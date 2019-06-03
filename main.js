@@ -21,7 +21,6 @@ var lastCMD;
 var parentThis;
 var arrCMD = [];
 var arrStateQuery_Routing = [];
-var stateCheckCounter;	//----Per Query gibt es nur die Chance, Ausgaenge abzufragen. Deswegen muessen wir mit einem Counter arbeiten.
 
 var bQueryComplete_Routing;
 
@@ -130,7 +129,7 @@ class Videomatrix extends utils.Adapter {
 	for (var i = 0; i < MAXCHANNELS; i++) {
             arrStateQuery_Routing.push(false);	    
         }
-	stateCheckCounter=0;
+	
         
         this.log.info('VideoMatrix: connecting to: ' + this.config.host + ':' + this.config.port);
 
@@ -379,9 +378,9 @@ class Videomatrix extends utils.Adapter {
 	    //this.log.info('parseMsg(): Routing Query Answer: IN:' + tmpIN + '; OUT:' + tmpOUT + ';');
 	    
 	    this.setStateAsync('input_' + (tmpIN).toString().padStart(2, '0') + '_out_' + (tmpOUT).toString().padStart(2, '0'), { val: true, ack: true });
-            arrStateQuery_Routing[stateCheckCounter] = true;
+            arrStateQuery_Routing[parseInt(tmpOUT)-1] = true;
             this.checkQueryDone();
-	    stateCheckCounter++;    //----Das ist nicht genau, aber anders geht es nicht
+	    
 
 	}else if(msg.toLowerCase().startsWith('/')){
 	    //----Repsonse auf gesetztes Routing, Obacht bei der Reihenfolge.
