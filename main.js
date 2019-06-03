@@ -287,6 +287,7 @@ class Videomatrix extends utils.Adapter {
             if(connection){
                 parentThis.log.error('AudioMatrix closed');
             }
+	    parentThis.log.error('AudioMatrix CLOSE');
             parentThis.reconnect();
         });
 
