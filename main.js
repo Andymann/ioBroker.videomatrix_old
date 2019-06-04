@@ -362,7 +362,7 @@ class Videomatrix extends utils.Adapter {
 */
     //----Verarbeitung ankommender Daten. alles ist asynchron.
     parseMsg(msg){
-
+	msg = msg.trim();
 	this.log.debug('parseMsg():' + msg );
 
 	if(msg.toLowerCase().includes('odel:')){
