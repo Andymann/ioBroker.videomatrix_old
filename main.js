@@ -269,7 +269,7 @@ class Videomatrix extends utils.Adapter {
             //if (e.code == "ENOTFOUND" || e.code == "ECONNREFUSED" || e.code == "ETIMEDOUT") {
             //            matrix.destroy();
             //}
-            parentThis.log.error('AudioMatrix TIMEOUT');
+            parentThis.log.error('VideoMatrix TIMEOUT');
             //parentThis.connection=false;
             //parentThis.setConnState(false, true);
             parentThis.reconnect();
@@ -285,19 +285,19 @@ class Videomatrix extends utils.Adapter {
 
         matrix.on('close', function(e) {
             if(connection){
-                parentThis.log.error('AudioMatrix closed');
+                parentThis.log.error('VideoMatrix closed');
             }
-	    parentThis.log.error('AudioMatrix CLOSE');
+	    parentThis.log.error('VideoMatrix CLOSE');
             parentThis.reconnect();
         });
 
         matrix.on('disconnect', function(e) {
-            parentThis.log.error('AudioMatrix disconnected');
+            parentThis.log.error('VideoMatrix disconnected');
             parentThis.reconnect();
         });
 
         matrix.on('end', function(e) {
-            parentThis.log.error('AudioMatrix ended');
+            parentThis.log.error('VideoMatrix ended');
             //parentThis.setConnState(false, true);                                            
         });
     }
