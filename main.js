@@ -135,9 +135,9 @@ class Videomatrix extends utils.Adapter {
 
         matrix = new net.Socket();
         matrix.connect(this.config.port, this.config.host, function() {
-            clearInterval(query);
+	    clearInterval(query);
             query = setInterval(function() {
-                    if(connection==false){
+		    if(connection==false){
 			if(bWaitingForResponse==false){
 	                        parentThis.log.info('VideoMatrix: connectMatrix().connection==false, sending CMDPING:' + cmdPing);
         	                arrCMD.push(cmdPing);
