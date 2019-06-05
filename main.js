@@ -131,8 +131,8 @@ class Videomatrix extends utils.Adapter {
         }
 	
 	//connection = false;
-        clearInterval(query);
-        clearTimeout(recnt);
+        //clearInterval(query);
+        //clearTimeout(recnt);
         //matrix.destroy();
         
         this.log.info('VideoMatrix: connecting to: ' + this.config.host + ':' + this.config.port);
