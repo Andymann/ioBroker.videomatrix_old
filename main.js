@@ -130,6 +130,10 @@ class Videomatrix extends utils.Adapter {
             arrStateQuery_Routing.push(false);	    
         }
 	
+	connection = false;
+        clearInterval(query);
+        clearTimeout(recnt);
+        matrix.destroy();
         
         this.log.info('VideoMatrix: connecting to: ' + this.config.host + ':' + this.config.port);
 
