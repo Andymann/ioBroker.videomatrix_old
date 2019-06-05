@@ -288,7 +288,7 @@ class Videomatrix extends utils.Adapter {
                 parentThis.log.error('VideoMatrix closed');
             }
 	    parentThis.log.error('VideoMatrix CLOSE');
-            parentThis.reconnect();
+            //parentThis.reconnect();
         });
 
         matrix.on('disconnect', function(e) {
